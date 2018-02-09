@@ -16,22 +16,19 @@
 
 #include "utils.h"
 
-//struktura przechowywuj¹ca wszystkie dane markera
-typedef struct MarkerStruct
-{
+// Struktur, die die Daten der Marker speichert
+typedef struct MarkerStruct {
 	int id;
-	//po³o¿enie naro¿ników markera w obrazie
+	// Position der Ecken im Bild
 	std::vector<Point2f> corners;
-	//te same punkty w uk³adzie wspó³rzêdnych markera
+	// Punkte im Marker-Koordinatensystem
 	std::vector<Point3f> points;
 
-	MarkerStruct()
-	{
+	MarkerStruct() {
 		id = -1;
 	}
 
-	MarkerStruct(int id, std::vector<Point2f> corners, std::vector<Point3f> points)
-	{
+	MarkerStruct(int id, std::vector<Point2f> corners, std::vector<Point3f> points) {
 		this->id = id;
 
 		this->corners = corners;
@@ -39,11 +36,11 @@ typedef struct MarkerStruct
 	}
 } MarkerInfo;
 
-class IMarker
-{
+class IMarker {
 public:
 	IMarker() {};
 
-	//znajduje wszystkie markery w obrazie i zapisuje je w zmiennej markers
-	virtual bool GetMarker(RGB *img, int height, int width, MarkerInfo &marker) = 0;
+	// Finds all markers and stores them into the variable marker
+	// Returns: Found at least one marker?
+	virtual bool get_marker(RGB* img, int height, int width, MarkerInfo& marker) = 0;
 };

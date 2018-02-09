@@ -17,33 +17,32 @@
 #include "stdafx.h"
 #include <opencv2/opencv.hpp>
 #include "utils.h"
-#include "IMarker.h"
+#include "iMarker.h"
 
 using namespace std;
 
-class MarkerDetector : public IMarker
-{
+class MarkerDetector : public IMarker {
 public:
 	MarkerDetector();
 
-	bool GetMarker(RGB *img, int height, int width, MarkerInfo &marker);
+	bool get_marker(RGB* img, int height, int width, MarkerInfo& marker) override;
 private:
-	int nMarkerCorners;
-	vector<cv::Point2f> vPts;
+	int marker_corners_;
+	vector<cv::Point2f> pts_;
 
-	int nMinSize;
-	int nMaxSize;
-	int nThreshold;
-	double dApproxPolyCoef;
-	double dMarkerFrame;
-	bool bDraw;
+	int min_size_;
+	int max_size_;
+	int threshold_;
+	double approx_poly_coef_;
+	double marker_frame_;
+	bool draw_;
 
-	bool GetMarker(cv::Mat &img, MarkerInfo &marker);
-	bool OrderCorners(vector<cv::Point2f> &corners);
-	int GetCode(cv::Mat &img, vector<cv::Point2f> points, vector<cv::Point2f> corners);
-	void CornersSubPix(vector<cv::Point2f> &corners, vector<cv::Point> contour, bool order);
+	bool get_marker(cv::Mat& img, MarkerInfo& marker);
+	static bool order_corners(vector<cv::Point2f>& corners);
+	int get_code(cv::Mat& img, vector<cv::Point2f> points, vector<cv::Point2f> corners);
+	void CornersSubPix(vector<cv::Point2f>& corners, vector<cv::Point> contour, bool order);
 	cv::Point2f GetIntersection(cv::Vec4f lin1, cv::Vec4f lin2);
-	void GetMarkerPoints(vector<Point3f> &pts);
-	void GetMarkerPointsForWarp(vector<cv::Point2f> &pts);
-	double GetMarkerArea(MarkerInfo &marker);
+	void GetMarkerPoints(vector<Point3f>& pts);
+	void GetMarkerPointsForWarp(vector<cv::Point2f>& pts);
+	double get_marker_area(MarkerInfo& marker);
 };

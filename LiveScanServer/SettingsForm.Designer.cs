@@ -1,11 +1,14 @@
-﻿namespace KinectServer
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace KinectServer
 {
     partial class SettingsForm
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -693,57 +696,57 @@
 
         #endregion
 
-        private System.Windows.Forms.Label lbMerge;
-        private System.Windows.Forms.CheckBox chMerge;
-        private System.Windows.Forms.Label lbICPIters;
-        private System.Windows.Forms.TextBox txtICPIters;
-        private System.Windows.Forms.GroupBox grClient;
-        private System.Windows.Forms.GroupBox grServer;
-        private System.Windows.Forms.TextBox txtRefinIters;
-        private System.Windows.Forms.Label lbOuterIters;
-        private System.Windows.Forms.GroupBox grFiltering;
-        private System.Windows.Forms.TextBox txtFilterNeighbors;
-        private System.Windows.Forms.CheckBox chFilter;
-        private System.Windows.Forms.Label lbFilterNeighbors;
-        private System.Windows.Forms.Label lbFilterDistance;
-        private System.Windows.Forms.TextBox txtFilterDistance;
-        private System.Windows.Forms.GroupBox grMarkers;
-        private System.Windows.Forms.Label lbX2;
-        private System.Windows.Forms.Button btRemove;
-        private System.Windows.Forms.TextBox txtOrientationZ;
-        private System.Windows.Forms.TextBox txtId;
-        private System.Windows.Forms.Label lbY2;
-        private System.Windows.Forms.TextBox txtOrientationY;
-        private System.Windows.Forms.Label lbId;
-        private System.Windows.Forms.Label lbZ2;
-        private System.Windows.Forms.TextBox txtOrientationX;
-        private System.Windows.Forms.Button btAdd;
-        private System.Windows.Forms.Label lbTranslation;
-        private System.Windows.Forms.Label lbOrientation;
-        private System.Windows.Forms.TextBox txtTranslationZ;
-        private System.Windows.Forms.TextBox txtTranslationX;
-        private System.Windows.Forms.ListBox lisMarkers;
-        private System.Windows.Forms.TextBox txtTranslationY;
-        private System.Windows.Forms.GroupBox grBounding;
-        private System.Windows.Forms.Label lbMin;
-        private System.Windows.Forms.TextBox txtMaxZ;
-        private System.Windows.Forms.TextBox txtMaxY;
-        private System.Windows.Forms.TextBox txtMinX;
-        private System.Windows.Forms.TextBox txtMaxX;
-        private System.Windows.Forms.TextBox txtMinY;
-        private System.Windows.Forms.Label lbMax;
-        private System.Windows.Forms.TextBox txtMinZ;
-        private System.Windows.Forms.Label lbZ;
-        private System.Windows.Forms.Label lbY;
-        private System.Windows.Forms.Label lbX;
-        private System.Windows.Forms.GroupBox grBody;
-        private System.Windows.Forms.CheckBox chBodyData;
-        private System.Windows.Forms.RadioButton rBinaryPly;
-        private System.Windows.Forms.Label lbFormat;
-        private System.Windows.Forms.RadioButton rAsciiPly;
-        private System.Windows.Forms.CheckBox chSkeletons;
-        private System.Windows.Forms.ComboBox cbCompressionLevel;
-        private System.Windows.Forms.Label label2;
+        private Label lbMerge;
+        private CheckBox chMerge;
+        private Label lbICPIters;
+        private TextBox txtICPIters;
+        private GroupBox grClient;
+        private GroupBox grServer;
+        private TextBox txtRefinIters;
+        private Label lbOuterIters;
+        private GroupBox grFiltering;
+        private TextBox txtFilterNeighbors;
+        private CheckBox chFilter;
+        private Label lbFilterNeighbors;
+        private Label lbFilterDistance;
+        private TextBox txtFilterDistance;
+        private GroupBox grMarkers;
+        private Label lbX2;
+        private Button btRemove;
+        private TextBox txtOrientationZ;
+        private TextBox txtId;
+        private Label lbY2;
+        private TextBox txtOrientationY;
+        private Label lbId;
+        private Label lbZ2;
+        private TextBox txtOrientationX;
+        private Button btAdd;
+        private Label lbTranslation;
+        private Label lbOrientation;
+        private TextBox txtTranslationZ;
+        private TextBox txtTranslationX;
+        private ListBox lisMarkers;
+        private TextBox txtTranslationY;
+        private GroupBox grBounding;
+        private Label lbMin;
+        private TextBox txtMaxZ;
+        private TextBox txtMaxY;
+        private TextBox txtMinX;
+        private TextBox txtMaxX;
+        private TextBox txtMinY;
+        private Label lbMax;
+        private TextBox txtMinZ;
+        private Label lbZ;
+        private Label lbY;
+        private Label lbX;
+        private GroupBox grBody;
+        private CheckBox chBodyData;
+        private RadioButton rBinaryPly;
+        private Label lbFormat;
+        private RadioButton rAsciiPly;
+        private CheckBox chSkeletons;
+        private ComboBox cbCompressionLevel;
+        private Label label2;
 
     }
 }

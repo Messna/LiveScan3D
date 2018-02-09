@@ -1,18 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
-namespace LiveScanPlayer
-{
-    interface IFrameFileReader
-    {
-        int frameIdx
-        {
-            get;
-            set;
-        }
+namespace LiveScanPlayer {
+    internal interface IFrameFileReader {
+        int FrameIdx { get; set; }
 
         void ReadFrame(List<float> vertices, List<byte> colors);
 

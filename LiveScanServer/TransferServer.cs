@@ -1,93 +1,67 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Threading;
-
-using System.Net.Sockets;
+﻿using System.Collections.Generic;
 using System.Net;
+using System.Net.Sockets;
+using System.Threading;
+using Timer = System.Timers.Timer;
 
+namespace KinectServer {
+    public class TransferServer {
+        public List<float> Vertices = new List<float>();
+        public List<byte> Colors = new List<byte>();
 
-namespace KinectServer
-{
-    public class TransferServer
-    {
-        public List<float> lVertices = new List<float>();
-        public List<byte> lColors = new List<byte>();
+        private TcpListener _oListener;
+        private readonly List<TransferSocket> _clientSockets = new List<TransferSocket>();
 
-        TcpListener oListener;
-        List<TransferSocket> lClientSockets = new List<TransferSocket>();
+        private readonly object _clientSocketLock = new object();
+        private bool _serverRunning;
 
-        object oClientSocketLock = new object();
-        bool bServerRunning = false;
-
-        ~TransferServer()
-        {
+        ~TransferServer() {
             StopServer();
         }
 
-        public void StartServer()
-        {
-            if (!bServerRunning)
-            {
-                oListener = new TcpListener(IPAddress.Any, 48002);
-                oListener.Start();
+        public void StartServer() {
+            if (_serverRunning) return;
+            _oListener = new TcpListener(IPAddress.Any, 48002);
+            _oListener.Start();
 
-                bServerRunning = true;
-                Thread listeningThread = new Thread(this.ListeningWorker);
-                listeningThread.Start();
-                Thread receivingThread = new Thread(this.ReceivingWorker);
-                receivingThread.Start();
-            }
+            _serverRunning = true;
+            var listeningThread = new Thread(ListeningWorker);
+            listeningThread.Start();
+            var receivingThread = new Thread(ReceivingWorker);
+            receivingThread.Start();
         }
 
-        public void StopServer()
-        {
-            if (bServerRunning)
-            {
-                bServerRunning = false;
+        public void StopServer() {
+            if (!_serverRunning) return;
+            _serverRunning = false;
 
-                oListener.Stop();
-                lock (oClientSocketLock)
-                    lClientSockets.Clear();
-            }
+            _oListener.Stop();
+            lock (_clientSocketLock)
+                _clientSockets.Clear();
         }
 
-        private void ListeningWorker()
-        {
-            while (bServerRunning)
-            {
-                try
-                {
-                    TcpClient newClient = oListener.AcceptTcpClient();
+        private void ListeningWorker() {
+            while (_serverRunning) {
+                try {
+                    var newClient = _oListener.AcceptTcpClient();
 
-                    lock (oClientSocketLock)
-                    {
-                        lClientSockets.Add(new TransferSocket(newClient));
+                    lock (_clientSocketLock) {
+                        _clientSockets.Add(new TransferSocket(newClient));
                     }
-                }
-                catch (SocketException)
-                {
-                }
-                System.Threading.Thread.Sleep(100);
+                } catch (SocketException) { }
+
+                Thread.Sleep(100);
             }
         }
 
-        private void ReceivingWorker()
-        {
-            System.Timers.Timer checkConnectionTimer = new System.Timers.Timer();
-            checkConnectionTimer.Interval = 1000;
+        private void ReceivingWorker() {
+            var checkConnectionTimer = new Timer {Interval = 1000};
 
-            checkConnectionTimer.Elapsed += delegate (object sender, System.Timers.ElapsedEventArgs e)
-            {
-                lock (oClientSocketLock)
-                {
-                    for (int i = 0; i < lClientSockets.Count; i++)
-                    {                      
-                        if (!lClientSockets[i].SocketConnected())
-                        {
-                            lClientSockets.RemoveAt(i);
+            checkConnectionTimer.Elapsed += delegate {
+                lock (_clientSocketLock) {
+                    for (var i = 0; i < _clientSockets.Count; i++) {
+                        if (!_clientSockets[i].SocketConnected()) {
+                            _clientSockets.RemoveAt(i);
                             i--;
                         }
                     }
@@ -96,25 +70,19 @@ namespace KinectServer
 
             checkConnectionTimer.Start();
 
-            while (bServerRunning)
-            {
-                lock (oClientSocketLock)
-                {
-                    for (int i = 0; i < lClientSockets.Count; i++)
-                    {
-                        byte[] buffer = lClientSockets[i].Receive(1);
+            while (_serverRunning) {
+                lock (_clientSocketLock) {
+                    foreach (var clientSocket in _clientSockets) {
+                        var buffer = clientSocket.Receive(1);
 
-                        while (buffer.Length != 0)
-                        {
-                            if (buffer[0] == 0)
-                            {
-                                lock (lVertices)
-                                {
-                                    lClientSockets[i].SendFrame(lVertices, lColors);
+                        while (buffer.Length != 0) {
+                            if (buffer[0] == 0) {
+                                lock (Vertices) {
+                                    clientSocket.SendFrame(Vertices, Colors);
                                 }
                             }
 
-                            buffer = lClientSockets[i].Receive(1);
+                            buffer = clientSocket.Receive(1);
                         }
                     }
                 }

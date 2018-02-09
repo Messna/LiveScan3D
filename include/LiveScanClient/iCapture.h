@@ -17,39 +17,37 @@
 #include "utils.h"
 #include "Kinect.h"
 
-struct Body
-{
-	Body()
-	{
+struct Body {
+	Body() {
 		bTracked = false;
 		vJoints.resize(JointType_Count);
 		vJointsInColorSpace.resize(JointType_Count);
 	}
+
 	bool bTracked;
 	std::vector<Joint> vJoints;
 	std::vector<Point2f> vJointsInColorSpace;
 };
 
-class ICapture
-{
+class ICapture {
 public:
 	ICapture();
 	~ICapture();
 
 	virtual bool Initialize() = 0;
 	virtual bool AcquireFrame() = 0;
-	virtual void MapDepthFrameToCameraSpace(Point3f *pCameraSpacePoints) = 0;
-	virtual void MapColorFrameToCameraSpace(Point3f *pCameraSpacePoints) = 0;
-	virtual void MapDepthFrameToColorSpace(Point2f *pColorSpacePoints) = 0;
-	virtual void MapColorFrameToDepthSpace(Point2f *pDepthSpacePoints) = 0;
+	virtual void MapDepthFrameToCameraSpace(Point3f* pCameraSpacePoints) = 0;
+	virtual void MapColorFrameToCameraSpace(Point3f* pCameraSpacePoints) = 0;
+	virtual void MapDepthFrameToColorSpace(Point2f* pColorSpacePoints) = 0;
+	virtual void MapColorFrameToDepthSpace(Point2f* pDepthSpacePoints) = 0;
 
 	bool bInitialized;
 
 	int nColorFrameHeight, nColorFrameWidth;
 	int nDepthFrameHeight, nDepthFrameWidth;
 
-	UINT16 *pDepth;
-	BYTE *pBodyIndex;
-	RGB *pColorRGBX;
+	UINT16* pDepth;
+	BYTE* pBodyIndex;
+	RGB* pColorRGBX;
 	std::vector<Body> vBodies;
 };

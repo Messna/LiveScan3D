@@ -14,8 +14,7 @@
 //    }
 #include "ICapture.h"
 
-ICapture::ICapture()
-{
+ICapture::ICapture() {
 	bInitialized = false;
 
 	nColorFrameHeight = 0;
@@ -23,28 +22,24 @@ ICapture::ICapture()
 	nDepthFrameHeight = 0;
 	nDepthFrameWidth = 0;
 
-	pDepth = NULL;
-	pColorRGBX = NULL;
-	pBodyIndex = NULL;
+	pDepth = nullptr;
+	pColorRGBX = nullptr;
+	pBodyIndex = nullptr;
 }
 
-ICapture::~ICapture()
-{
-	if (pDepth != NULL)
-	{
+ICapture::~ICapture() {
+	if (pDepth != nullptr) {
 		delete[] pDepth;
-		pDepth = NULL;
+		pDepth = nullptr;
 	}
 
-	if (pColorRGBX != NULL)
-	{
+	if (pColorRGBX != nullptr) {
 		delete[] pColorRGBX;
-		pColorRGBX = NULL;
+		pColorRGBX = nullptr;
 	}
 
-	if (pBodyIndex != NULL)
-	{
+	if (pBodyIndex != nullptr) {
 		delete[] pBodyIndex;
-		pBodyIndex = NULL;
+		pBodyIndex = nullptr;
 	}
 }

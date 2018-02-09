@@ -12,85 +12,72 @@
 //        title={LiveScan3D: A Fast and Inexpensive 3D Data Acquisition System for Multiple Kinect v2 Sensors},
 //        year={2015},
 //    }
-#include "KinectCapture.h"
+#include "kinectCapture.h"
 #include <chrono>
 
-KinectCapture::KinectCapture()
-{
-	pKinectSensor = NULL;
-	pCoordinateMapper = NULL;
-	pMultiSourceFrameReader = NULL;
+KinectCapture::KinectCapture() {
+	pKinectSensor = nullptr;
+	pCoordinateMapper = nullptr;
+	pMultiSourceFrameReader = nullptr;
 }
 
-KinectCapture::~KinectCapture()
-{
+KinectCapture::~KinectCapture() {
 	SafeRelease(pKinectSensor);
 	SafeRelease(pCoordinateMapper);
 	SafeRelease(pMultiSourceFrameReader);
 }
 
-bool KinectCapture::Initialize()
-{
-	HRESULT hr;
-
-	hr = GetDefaultKinectSensor(&pKinectSensor);
-	if (FAILED(hr))
-	{
+bool KinectCapture::Initialize() {
+	HRESULT hr = GetDefaultKinectSensor(&pKinectSensor);
+	if (FAILED(hr)) {
 		bInitialized = false;
 		return bInitialized;
 	}
 
-	if (pKinectSensor)
-	{
+	if (pKinectSensor) {
 		pKinectSensor->get_CoordinateMapper(&pCoordinateMapper);
 		hr = pKinectSensor->Open();
 
-		if (SUCCEEDED(hr))
-		{
-			pKinectSensor->OpenMultiSourceFrameReader(FrameSourceTypes::FrameSourceTypes_Color | 
-				FrameSourceTypes::FrameSourceTypes_Depth | 
-				FrameSourceTypes::FrameSourceTypes_Body |
-				FrameSourceTypes::FrameSourceTypes_BodyIndex, 
-				&pMultiSourceFrameReader);
+		if (SUCCEEDED(hr)) {
+			pKinectSensor->OpenMultiSourceFrameReader(FrameSourceTypes::FrameSourceTypes_Color |
+			                                          FrameSourceTypes::FrameSourceTypes_Depth |
+			                                          FrameSourceTypes::FrameSourceTypes_Body |
+			                                          FrameSourceTypes::FrameSourceTypes_BodyIndex,
+			                                          &pMultiSourceFrameReader);
 		}
 	}
 
 	bInitialized = SUCCEEDED(hr);
 
-	if (bInitialized)
-	{
-		std::chrono::time_point<std::chrono::system_clock> start = std::chrono::system_clock::now();
-		bool bTemp;
-		do
-		{
-			bTemp = AcquireFrame();
-			
+	if (bInitialized) {
+		const auto start = std::chrono::system_clock::now();
+		bool temp;
+		do {
+			temp = AcquireFrame();
+
 			std::chrono::duration<double> elapsedSeconds = std::chrono::system_clock::now() - start;
-			if (elapsedSeconds.count() > 5.0)
-			{
+			if (elapsedSeconds.count() > 5.0) {
 				bInitialized = false;
 				break;
 			}
 
-		} while (!bTemp);
+		}
+		while (!temp);
 	}
 
 	return bInitialized;
 }
 
-bool KinectCapture::AcquireFrame()
-{
-	if (!bInitialized)
-	{
+bool KinectCapture::AcquireFrame() {
+	if (!bInitialized) {
 		return false;
 	}
 
 	//Multi frame
-	IMultiSourceFrame* pMultiFrame = NULL;
+	IMultiSourceFrame* pMultiFrame = nullptr;
 	HRESULT hr = pMultiSourceFrameReader->AcquireLatestFrame(&pMultiFrame);
 
-	if (!SUCCEEDED(hr))
-	{
+	if (!SUCCEEDED(hr)) {
 		return false;
 	}
 
@@ -104,38 +91,39 @@ bool KinectCapture::AcquireFrame()
 	return true;
 }
 
-void KinectCapture::MapDepthFrameToCameraSpace(Point3f *pCameraSpacePoints)
-{
-	pCoordinateMapper->MapDepthFrameToCameraSpace(nDepthFrameWidth * nDepthFrameHeight, pDepth, nDepthFrameWidth * nDepthFrameHeight, (CameraSpacePoint*)pCameraSpacePoints);
+void KinectCapture::MapDepthFrameToCameraSpace(Point3f* pCameraSpacePoints) {
+	pCoordinateMapper->MapDepthFrameToCameraSpace(nDepthFrameWidth * nDepthFrameHeight, pDepth,
+	                                              nDepthFrameWidth * nDepthFrameHeight,
+	                                              (CameraSpacePoint*)pCameraSpacePoints);
 }
 
-void KinectCapture::MapColorFrameToCameraSpace(Point3f *pCameraSpacePoints)
-{
-	pCoordinateMapper->MapColorFrameToCameraSpace(nDepthFrameWidth * nDepthFrameHeight, pDepth, nColorFrameWidth * nColorFrameHeight, (CameraSpacePoint*)pCameraSpacePoints);
+void KinectCapture::MapColorFrameToCameraSpace(Point3f* pCameraSpacePoints) {
+	pCoordinateMapper->MapColorFrameToCameraSpace(nDepthFrameWidth * nDepthFrameHeight, pDepth,
+	                                              nColorFrameWidth * nColorFrameHeight,
+	                                              (CameraSpacePoint*)pCameraSpacePoints);
 }
 
-void KinectCapture::MapDepthFrameToColorSpace(Point2f *pColorSpacePoints)
-{
-	pCoordinateMapper->MapDepthFrameToColorSpace(nDepthFrameWidth * nDepthFrameHeight, pDepth, nDepthFrameWidth * nDepthFrameHeight, (ColorSpacePoint*)pColorSpacePoints);
+void KinectCapture::MapDepthFrameToColorSpace(Point2f* pColorSpacePoints) {
+	pCoordinateMapper->MapDepthFrameToColorSpace(nDepthFrameWidth * nDepthFrameHeight, pDepth,
+	                                             nDepthFrameWidth * nDepthFrameHeight,
+	                                             (ColorSpacePoint*)pColorSpacePoints);
 }
 
-void KinectCapture::MapColorFrameToDepthSpace(Point2f *pDepthSpacePoints)
-{
-	pCoordinateMapper->MapColorFrameToDepthSpace(nDepthFrameWidth * nDepthFrameHeight, pDepth, nColorFrameWidth * nColorFrameHeight, (DepthSpacePoint*)pDepthSpacePoints);;
+void KinectCapture::MapColorFrameToDepthSpace(Point2f* pDepthSpacePoints) {
+	pCoordinateMapper->MapColorFrameToDepthSpace(nDepthFrameWidth * nDepthFrameHeight, pDepth,
+	                                             nColorFrameWidth * nColorFrameHeight,
+	                                             (DepthSpacePoint*)pDepthSpacePoints);;
 }
 
-void KinectCapture::GetDepthFrame(IMultiSourceFrame* pMultiFrame)
-{
-	IDepthFrameReference* pDepthFrameReference = NULL;
-	IDepthFrame* pDepthFrame = NULL;
+void KinectCapture::GetDepthFrame(IMultiSourceFrame* pMultiFrame) {
+	IDepthFrameReference* pDepthFrameReference = nullptr;
+	IDepthFrame* pDepthFrame = nullptr;
 	pMultiFrame->get_DepthFrameReference(&pDepthFrameReference);
 	HRESULT hr = pDepthFrameReference->AcquireFrame(&pDepthFrame);
 
-	if (SUCCEEDED(hr))
-	{
-		if (pDepth == NULL)
-		{
-			IFrameDescription* pFrameDescription = NULL;
+	if (SUCCEEDED(hr)) {
+		if (pDepth == nullptr) {
+			IFrameDescription* pFrameDescription = nullptr;
 			hr = pDepthFrame->get_FrameDescription(&pFrameDescription);
 			pFrameDescription->get_Width(&nDepthFrameWidth);
 			pFrameDescription->get_Height(&nDepthFrameHeight);
@@ -151,18 +139,15 @@ void KinectCapture::GetDepthFrame(IMultiSourceFrame* pMultiFrame)
 	SafeRelease(pDepthFrameReference);
 }
 
-void KinectCapture::GetColorFrame(IMultiSourceFrame* pMultiFrame)
-{
-	IColorFrameReference* pColorFrameReference = NULL;
-	IColorFrame* pColorFrame = NULL;
+void KinectCapture::GetColorFrame(IMultiSourceFrame* pMultiFrame) {
+	IColorFrameReference* pColorFrameReference = nullptr;
+	IColorFrame* pColorFrame = nullptr;
 	pMultiFrame->get_ColorFrameReference(&pColorFrameReference);
 	HRESULT hr = pColorFrameReference->AcquireFrame(&pColorFrame);
 
-	if (SUCCEEDED(hr))
-	{
-		if (pColorRGBX == NULL)
-		{
-			IFrameDescription* pFrameDescription = NULL;
+	if (SUCCEEDED(hr)) {
+		if (pColorRGBX == nullptr) {
+			IFrameDescription* pFrameDescription = nullptr;
 			hr = pColorFrame->get_FrameDescription(&pFrameDescription);
 			hr = pFrameDescription->get_Width(&nColorFrameWidth);
 			hr = pFrameDescription->get_Height(&nColorFrameHeight);
@@ -171,31 +156,28 @@ void KinectCapture::GetColorFrame(IMultiSourceFrame* pMultiFrame)
 		}
 
 		UINT nBufferSize = nColorFrameWidth * nColorFrameHeight * sizeof(RGB);
-		hr = pColorFrame->CopyConvertedFrameDataToArray(nBufferSize, reinterpret_cast<BYTE*>(pColorRGBX), ColorImageFormat_Bgra);
+		hr = pColorFrame->CopyConvertedFrameDataToArray(nBufferSize, reinterpret_cast<BYTE*>(pColorRGBX),
+		                                                ColorImageFormat_Bgra);
 	}
 
 	SafeRelease(pColorFrame);
 	SafeRelease(pColorFrameReference);
 }
 
-void KinectCapture::GetBodyFrame(IMultiSourceFrame* pMultiFrame)
-{
-	IBodyFrameReference* pBodyFrameReference = NULL;
-	IBodyFrame* pBodyFrame = NULL;
+void KinectCapture::GetBodyFrame(IMultiSourceFrame* pMultiFrame) {
+	IBodyFrameReference* pBodyFrameReference = nullptr;
+	IBodyFrame* pBodyFrame = nullptr;
 	pMultiFrame->get_BodyFrameReference(&pBodyFrameReference);
 	HRESULT hr = pBodyFrameReference->AcquireFrame(&pBodyFrame);
 
 
-	if (SUCCEEDED(hr))
-	{
-		IBody* bodies[BODY_COUNT] = { NULL };
+	if (SUCCEEDED(hr)) {
+		IBody* bodies[BODY_COUNT] = {nullptr};
 		pBodyFrame->GetAndRefreshBodyData(BODY_COUNT, bodies);
 
 		vBodies = std::vector<Body>(BODY_COUNT);
-		for (int i = 0; i < BODY_COUNT; i++)
-		{		
-			if (bodies[i])
-			{
+		for (int i = 0; i < BODY_COUNT; i++) {
+			if (bodies[i]) {
 				Joint joints[JointType_Count];
 				BOOLEAN isTracked;
 
@@ -211,8 +193,7 @@ void KinectCapture::GetBodyFrame(IMultiSourceFrame* pMultiFrame)
 
 				vBodies[i].vJointsInColorSpace.resize(JointType_Count);
 
-				for (int j = 0; j < JointType_Count; j++)
-				{
+				for (int j = 0; j < JointType_Count; j++) {
 					ColorSpacePoint tempPoint;
 					pCoordinateMapper->MapCameraPointToColorSpace(joints[j].Position, &tempPoint);
 					vBodies[i].vJointsInColorSpace[j].X = tempPoint.X;
@@ -226,18 +207,15 @@ void KinectCapture::GetBodyFrame(IMultiSourceFrame* pMultiFrame)
 	SafeRelease(pBodyFrameReference);
 }
 
-void KinectCapture::GetBodyIndexFrame(IMultiSourceFrame* pMultiFrame)
-{
-	IBodyIndexFrameReference* pBodyIndexFrameReference = NULL;
-	IBodyIndexFrame* pBodyIndexFrame = NULL;
+void KinectCapture::GetBodyIndexFrame(IMultiSourceFrame* pMultiFrame) {
+	IBodyIndexFrameReference* pBodyIndexFrameReference = nullptr;
+	IBodyIndexFrame* pBodyIndexFrame = nullptr;
 	pMultiFrame->get_BodyIndexFrameReference(&pBodyIndexFrameReference);
 	HRESULT hr = pBodyIndexFrameReference->AcquireFrame(&pBodyIndexFrame);
 
 
-	if (SUCCEEDED(hr))
-	{
-		if (pBodyIndex == NULL)
-		{
+	if (SUCCEEDED(hr)) {
+		if (pBodyIndex == nullptr) {
 			pBodyIndex = new BYTE[nDepthFrameHeight * nDepthFrameWidth];
 		}
 

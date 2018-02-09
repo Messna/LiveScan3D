@@ -1,11 +1,14 @@
-﻿namespace LiveScanPlayer
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace LiveScanPlayer
 {
     partial class PlayerWindowForm
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -154,16 +157,16 @@
 
         #endregion
 
-        private System.Windows.Forms.Button btSelect;
-        private System.Windows.Forms.Button btStart;
-        private System.Windows.Forms.Button btShow;
-        private System.ComponentModel.BackgroundWorker updateWorker;
-        private System.ComponentModel.BackgroundWorker OpenGLWorker;
-        private System.Windows.Forms.Button btRewind;
-        private System.Windows.Forms.Button btRemove;
-        private System.Windows.Forms.ListView lFrameFilesListView;
-        private System.Windows.Forms.CheckBox chSaveFrames;
-        private System.Windows.Forms.Button btnSelectPly;
+        private Button btSelect;
+        private Button btStart;
+        private Button btShow;
+        private BackgroundWorker updateWorker;
+        private BackgroundWorker OpenGLWorker;
+        private Button btRewind;
+        private Button btRemove;
+        private ListView lFrameFilesListView;
+        private CheckBox chSaveFrames;
+        private Button btnSelectPly;
     }
 }
 

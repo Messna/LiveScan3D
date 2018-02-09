@@ -33,12 +33,10 @@
 #endif
 
 // Safe release for interfaces
-template<class Interface>
-inline void SafeRelease(Interface *& pInterfaceToRelease)
-{
-    if (pInterfaceToRelease != NULL)
-    {
-        pInterfaceToRelease->Release();
-        pInterfaceToRelease = NULL;
-    }
+template <class Interface>
+void SafeRelease(Interface*& pInterfaceToRelease) {
+	if (pInterfaceToRelease != nullptr) {
+		pInterfaceToRelease->Release();
+		pInterfaceToRelease = NULL;
+	}
 }

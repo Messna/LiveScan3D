@@ -1,90 +1,70 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO;
+using System.Text;
 
-namespace LiveScanPlayer
-{
-    class FrameFileReaderPly : IFrameFileReader
-    {
-        string[] filenames;
-        int currentFrameIdx = 0;
+namespace LiveScanPlayer {
+    internal class FrameFileReaderPly : IFrameFileReader {
+        private readonly string[] _filenames;
+        private int _currentFrameIdx;
 
-        public FrameFileReaderPly(string[] filenames)
-        {
-            this.filenames = filenames;
+        public FrameFileReaderPly(string[] filenames) {
+            _filenames = filenames;
         }
 
-        public int frameIdx
-        {
-            get
-            {
-                return currentFrameIdx;
-            }
-            set
-            {
-                JumpToFrame(value);
-            }
+        public int FrameIdx {
+            get => _currentFrameIdx;
+            set => JumpToFrame(value);
         }
 
-        public void ReadFrame(List<float> vertices, List<byte> colors)
-        {
-            BinaryReader reader = new BinaryReader(new FileStream(filenames[currentFrameIdx], FileMode.Open));
+        public void ReadFrame(List<float> vertices, List<byte> colors) {
+            var reader = new BinaryReader(new FileStream(_filenames[_currentFrameIdx], FileMode.Open));
 
-            string line = ReadLine(reader);
+            var line = ReadLine(reader);
             while (!line.Contains("element vertex"))
                 line = ReadLine(reader);
-            string[] lineElems = line.Split(' ');
-            int nPoints = Int32.Parse(lineElems[2]);
+            var lineElems = line.Split(' ');
+            var nPoints = int.Parse(lineElems[2]);
             while (!line.Contains("end_header"))
                 line = ReadLine(reader);
 
-            for (int i = 0; i < nPoints; i++)
-            {
-                for (int j = 0; j < 3; j++)
-                {
+            for (var i = 0; i < nPoints; i++) {
+                for (var j = 0; j < 3; j++) {
                     vertices.Add(reader.ReadSingle());
                 }
-                for (int j = 0; j < 3; j++)
-                {
+
+                for (var j = 0; j < 3; j++) {
                     colors.Add(reader.ReadByte());
                 }
             }
 
             reader.Dispose();
 
-            currentFrameIdx++;
-            if (currentFrameIdx >= filenames.Length)
-                currentFrameIdx = 0;
+            _currentFrameIdx++;
+            if (_currentFrameIdx >= _filenames.Length)
+                _currentFrameIdx = 0;
         }
 
-        public void JumpToFrame(int frameIdx)
-        {
-            currentFrameIdx = frameIdx;
-            if (currentFrameIdx >= filenames.Length)
-                currentFrameIdx = 0;
+        public void JumpToFrame(int frameIdx) {
+            _currentFrameIdx = frameIdx;
+            if (_currentFrameIdx >= _filenames.Length)
+                _currentFrameIdx = 0;
         }
 
-        public void Rewind()
-        {
-            currentFrameIdx = 0;
+        public void Rewind() {
+            _currentFrameIdx = 0;
         }
 
-        public string ReadLine(BinaryReader binaryReader)
-        {
-            StringBuilder builder = new StringBuilder();
-            byte buffer = binaryReader.ReadByte();
+        private static string ReadLine(BinaryReader binaryReader) {
+            var builder = new StringBuilder();
+            var buffer = binaryReader.ReadByte();
 
-            while (buffer != '\n')
-            {
-                builder.Append((char)buffer);
+            while (buffer != '\n') {
+                builder.Append((char) buffer);
                 buffer = binaryReader.ReadByte();
             }
 
             return builder.ToString();
         }
-
     }
 }

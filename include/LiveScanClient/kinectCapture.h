@@ -14,8 +14,7 @@
 //    }
 #pragma once
 
-#include "stdafx.h"
-#include "ICapture.h"
+#include "iCapture.h"
 #include "Kinect.h"
 #include "utils.h"
 
@@ -25,12 +24,12 @@ public:
 	KinectCapture();
 	~KinectCapture();
 
-	bool Initialize();
-	bool AcquireFrame();
-	void MapDepthFrameToCameraSpace(Point3f *pCameraSpacePoints);
-	void MapColorFrameToCameraSpace(Point3f *pCameraSpacePoints);
-	void MapDepthFrameToColorSpace(Point2f *pColorSpacePoints);
-	void MapColorFrameToDepthSpace(Point2f *pDepthSpacePoints);
+	bool Initialize() override;
+	bool AcquireFrame() override;
+	void MapDepthFrameToCameraSpace(Point3f *pCameraSpacePoints) override;
+	void MapColorFrameToCameraSpace(Point3f *pCameraSpacePoints) override;
+	void MapDepthFrameToColorSpace(Point2f *pColorSpacePoints) override;
+	void MapColorFrameToDepthSpace(Point2f *pDepthSpacePoints) override;
 private:	
 	ICoordinateMapper* pCoordinateMapper;
 	IKinectSensor* pKinectSensor;

@@ -20,19 +20,17 @@
 
 using namespace std;
 
-struct RGB
-{
+struct RGB {
 	unsigned char R, G, B;
 };
 
-void savePLY(std::string filename, std::vector<Point3f> vertices, std::vector<RGB> colors)
-{
+void savePLY(std::string filename, std::vector<Point3f> vertices, std::vector<RGB> colors) {
 
-	unsigned int numVertices = vertices.size();
+	const unsigned int numVertices = vertices.size();
 	unsigned int numColors = colors.size();
 
 	// Open File
-	FILE *meshFile = NULL;
+	FILE* meshFile = nullptr;
 	errno_t err = fopen_s(&meshFile, filename.c_str(), "wt");
 
 
@@ -45,7 +43,9 @@ void savePLY(std::string filename, std::vector<Point3f> vertices, std::vector<RG
 	int written = 0;
 
 	// Elements are: x,y,z, r,g,b
-	written = sprintf_s(outStr, bufSize, "element vertex %u\nproperty float x\nproperty float y\nproperty float z\nproperty uchar red\nproperty uchar green\nproperty uchar blue\n", numVertices);
+	written = sprintf_s(outStr, bufSize,
+	                    "element vertex %u\nproperty float x\nproperty float y\nproperty float z\nproperty uchar red\nproperty uchar green\nproperty uchar blue\n",
+	                    numVertices);
 	fwrite(outStr, sizeof(char), written, meshFile);
 
 	written = sprintf_s(outStr, bufSize, "end_header\n");
@@ -53,15 +53,14 @@ void savePLY(std::string filename, std::vector<Point3f> vertices, std::vector<RG
 
 
 	// Sequentially write the 3 vertices of the triangle, for each triangle
-	for (unsigned int vertexIndex = 0; vertexIndex < numVertices; vertexIndex++)
-	{
-		unsigned int color0 = colors[vertexIndex].R;
-		unsigned int color1 = colors[vertexIndex].G;
-		unsigned int color2 = colors[vertexIndex].B;
+	for (unsigned int vertexIndex = 0; vertexIndex < numVertices; vertexIndex++) {
+		const unsigned int color0 = colors[vertexIndex].R;
+		const unsigned int color1 = colors[vertexIndex].G;
+		const unsigned int color2 = colors[vertexIndex].B;
 
 		written = sprintf_s(outStr, bufSize, "%f %f %f %u %u %u\n",
-			vertices[vertexIndex].X, vertices[vertexIndex].Y, vertices[vertexIndex].Z,
-			((color0)& 255), ((color1)& 255), (color2 & 255));
+		                    vertices[vertexIndex].X, vertices[vertexIndex].Y, vertices[vertexIndex].Z,
+		                    ((color0) & 255), ((color1) & 255), (color2 & 255));
 
 		fwrite(outStr, sizeof(char), written, meshFile);
 	}
@@ -70,9 +69,8 @@ void savePLY(std::string filename, std::vector<Point3f> vertices, std::vector<RG
 	fclose(meshFile);
 }
 
-void loadPLY(string filename, vector<Point3f> &verts, vector<RGB> &colors)
-{
-	FILE *f;
+void loadPLY(string filename, vector<Point3f>& verts, vector<RGB>& colors) {
+	FILE* f;
 	int nVerts;
 
 	fopen_s(&f, filename.c_str(), "r");
@@ -86,15 +84,14 @@ void loadPLY(string filename, vector<Point3f> &verts, vector<RGB> &colors)
 	for (int i = 0; i < 7; i++)
 		fgets(buffer, 100, f);
 
-	for (int i = 0; i < nVerts; i++)
-	{
+	for (int i = 0; i < nVerts; i++) {
 		fgets(buffer, 100, f);
 
-		Point3f point;
-		RGB rgb;
+		Point3f point{};
+		RGB rgb{};
 		int R, G, B;
 		sscanf_s(buffer, "%f %f %f %d %d %d\n", &point.X, &point.Y, &point.Z, &R, &G, &B);
-		
+
 		rgb.R = R;
 		rgb.G = G;
 		rgb.B = B;
@@ -108,8 +105,7 @@ void loadPLY(string filename, vector<Point3f> &verts, vector<RGB> &colors)
 
 
 //This function here can be used to test the ICP functionality, it aligns the points clouds in "test1.ply" and "test2.ply"
-int main()
-{
+int main() {
 	vector<Point3f> verts1, verts2;
 	vector<RGB> colors1, colors2;
 

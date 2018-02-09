@@ -1,0 +1,866 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="eea886f4-5165-435a-9390-121d035bb328" name="Default" comment="" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file leaf-file-name="ZSTDDecompressor.cs" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/LiveScanServer/ZSTDDecompressor.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="119">
+              <caret line="9" column="53" lean-forward="false" selection-start-line="9" selection-start-column="53" selection-end-line="9" selection-end-column="53" />
+              <folding>
+                <marker date="1517873234426" expanded="false" signature="6:82" ph="..." />
+                <marker date="1517873234426" expanded="true" signature="107:1239" ph="{...}" />
+                <marker date="1517873234426" expanded="true" signature="152:1237" ph="{...}" />
+                <marker date="1517873234426" expanded="true" signature="663:1231" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/ICP/icp.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/LiveScanServer/KinectSettings.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/LiveScanServer/TransferServer.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/LiveScanPlayer/PlayerWindowForm.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/LiveScanServer/KinectServer.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/LiveScanClient/iMarker.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/LiveScanServer/SettingsForm.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/LiveScanServer/KinectSocket.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/LiveScanServer/Program.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/include/ICP/icp.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/LiveScanServer/ZSTDDecompressor.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/LiveScanClient/iCapture.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/LiveScanServer/MainWindowForm.Designer.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/LiveScanServer/MainWindowForm.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/LiveScanServer/OpenGLWindow.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/socketCS.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/LiveScanPlayer/FrameFileReaderBin.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/LiveScanPlayer/IFrameFileReader.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/LiveScanServer/Utils.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/LiveScanServer/TransferSocket.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/LiveScanPlayer/Program.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/ICP/main.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/LiveScanPlayer/FrameFileReaderPly.cs" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/LiveScanServer/ZSTDDecompressor.cs" />
+        <option value="$PROJECT_DIR$/LiveScanServer/Utils.cs" />
+        <option value="$PROJECT_DIR$/LiveScanServer/TransferSocket.cs" />
+        <option value="$PROJECT_DIR$/LiveScanServer/TransferServer.cs" />
+        <option value="$PROJECT_DIR$/LiveScanServer/SettingsForm.cs" />
+        <option value="$PROJECT_DIR$/LiveScanServer/Program.cs" />
+        <option value="$PROJECT_DIR$/LiveScanServer/OpenGLWindow.cs" />
+        <option value="$PROJECT_DIR$/LiveScanServer/MainWindowForm.cs" />
+        <option value="$PROJECT_DIR$/LiveScanServer/KinectSocket.cs" />
+        <option value="$PROJECT_DIR$/LiveScanServer/KinectSettings.cs" />
+        <option value="$PROJECT_DIR$/LiveScanServer/KinectServer.cs" />
+        <option value="$PROJECT_DIR$/LiveScanPlayer/Program.cs" />
+        <option value="$PROJECT_DIR$/LiveScanPlayer/IFrameFileReader.cs" />
+        <option value="$PROJECT_DIR$/LiveScanPlayer/PlayerWindowForm.cs" />
+        <option value="$PROJECT_DIR$/LiveScanPlayer/FrameFileReaderPly.cs" />
+        <option value="$PROJECT_DIR$/LiveScanPlayer/FrameFileReaderBin.cs" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="305" />
+    <option name="y" value="103" />
+    <option name="width" value="1400" />
+    <option name="height" value="1000" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="SolutionExplorer" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+      <manualOrder />
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="SolutionExplorer">
+        <subPane>
+          <expand>
+            <path>
+              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="LiveScan (4 projects)" type="977d5f41:SolutionExplorerNodeRider" />
+            </path>
+            <path>
+              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="LiveScan (4 projects)" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="ICP" type="977d5f41:SolutionExplorerNodeRider" />
+            </path>
+            <path>
+              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="LiveScan (4 projects)" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="ICP" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="ICP" type="977d5f41:SolutionExplorerNodeRider" />
+            </path>
+            <path>
+              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="LiveScan (4 projects)" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="ICP" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="include" type="977d5f41:SolutionExplorerNodeRider" />
+            </path>
+            <path>
+              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="LiveScan (4 projects)" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="ICP" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="include" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="ICP" type="977d5f41:SolutionExplorerNodeRider" />
+            </path>
+            <path>
+              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="LiveScan (4 projects)" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="LiveScanPlayer" type="977d5f41:SolutionExplorerNodeRider" />
+            </path>
+            <path>
+              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="LiveScan (4 projects)" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="LiveScanServer" type="977d5f41:SolutionExplorerNodeRider" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+        <option name="show-file-system" value="false" />
+        <option name="show-all-items" value="false" />
+      </pane>
+      <pane id="Scratches" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration name="Default" type="DotNetProject" factoryName=".NET Project">
+      <option name="EXE_PATH" value="" />
+      <option name="PROGRAM_PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <envs />
+      <option name="USE_MONO" value="0" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <option name="PROJECT_PATH" value="" />
+      <option name="PROJECT_EXE_PATH_TRACKING" value="1" />
+      <option name="PROJECT_ARGUMENTS_TRACKING" value="1" />
+      <option name="PROJECT_WORKING_DIRECTORY_TRACKING" value="1" />
+      <option name="PROJECT_KIND" value="None" />
+      <option name="PROJECT_TFM" value="" />
+    </configuration>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false">
+    <option name="remove_strategy" value="false" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="eea886f4-5165-435a-9390-121d035bb328" name="Default" comment="" />
+      <created>1517871489474</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1517871489474</updated>
+      <workItem from="1517871490644" duration="528000" />
+      <workItem from="1517872855998" duration="2212000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="2740000" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1936" height="1035" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Errors In Solution" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32890365" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Unit Tests" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="NuGet" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2553305" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32890365" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager />
+    <watches-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/LiveScanServer/TransferSocket.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="748">
+          <caret line="46" column="30" lean-forward="false" selection-start-line="46" selection-start-column="30" selection-end-line="46" selection-end-column="30" />
+          <folding>
+            <marker date="1517873170979" expanded="false" signature="6:73" ph="..." />
+            <marker date="1517873170979" expanded="true" signature="98:1671" ph="{...}" />
+            <marker date="1517873170979" expanded="true" signature="132:1669" ph="{...}" />
+            <marker date="1517873170979" expanded="true" signature="233:280" ph="{...}" />
+            <marker date="1517873170979" expanded="true" signature="324:622" ph="{...}" />
+            <marker date="1517873170979" expanded="true" signature="393:541" ph="{...}" />
+            <marker date="1517873170979" expanded="true" signature="662:711" ph="{...}" />
+            <marker date="1517873170979" expanded="true" signature="751:835" ph="{...}" />
+            <marker date="1517873170979" expanded="true" signature="879:963" ph="{...}" />
+            <marker date="1517873170979" expanded="true" signature="1036:1663" ph="{...}" />
+            <marker date="1517873170979" expanded="true" signature="1365:1592" ph="{...}" />
+            <marker date="1517873170979" expanded="true" signature="1611:1653" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LiveScanServer/TransferServer.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-672">
+          <caret line="10" column="0" lean-forward="true" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+          <folding>
+            <marker date="1517873306682" expanded="false" signature="6:136" ph="..." />
+            <marker date="1517873306682" expanded="true" signature="161:2979" ph="{...}" />
+            <marker date="1517873306682" expanded="true" signature="195:2977" ph="{...}" />
+            <marker date="1517873306682" expanded="true" signature="570:607" ph="{...}" />
+            <marker date="1517873306682" expanded="true" signature="643:1026" ph="{...}" />
+            <marker date="1517873306682" expanded="true" signature="1061:1258" ph="{...}" />
+            <marker date="1517873306682" expanded="true" signature="1299:1676" ph="{...}" />
+            <marker date="1517873306682" expanded="true" signature="1336:1666" ph="{...}" />
+            <marker date="1517873306682" expanded="true" signature="1358:1588" ph="{...}" />
+            <marker date="1517873306682" expanded="true" signature="1717:2971" ph="{...}" />
+            <marker date="1517873306682" expanded="true" signature="1953:2159" ph="{...}" />
+            <marker date="1517873306682" expanded="true" signature="2021:2137" ph="{...}" />
+            <marker date="1517873306682" expanded="true" signature="2272:2919" ph="{...}" />
+            <marker date="1517873306682" expanded="true" signature="2382:2852" ph="{...}" />
+            <marker date="1517873306682" expanded="true" signature="2498:2830" ph="{...}" />
+            <marker date="1517873306682" expanded="true" signature="2548:2741" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LiveScanServer/SettingsForm.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-9">
+          <caret line="243" column="13" lean-forward="true" selection-start-line="243" selection-start-column="13" selection-end-line="243" selection-end-column="13" />
+          <folding>
+            <marker date="1517873648552" expanded="true" signature="0:812" ph="/* Copyright (C) 2015  Marek Kowalski (M.Kowalski@ire.pw.edu.pl), Jacek Naruniec (J.Naruniec@ire.pw.edu.pl) ... */" />
+            <marker date="1517873648552" expanded="false" signature="820:883" ph="..." />
+            <marker date="1517873648552" expanded="true" signature="908:11709" ph="{...}" />
+            <marker date="1517873648552" expanded="true" signature="955:11707" ph="{...}" />
+            <marker date="1517873648552" expanded="true" signature="1099:1145" ph="{...}" />
+            <marker date="1517873648552" expanded="true" signature="1214:2746" ph="{...}" />
+            <marker date="1517873648552" expanded="true" signature="2495:2596" ph="{...}" />
+            <marker date="1517873648552" expanded="true" signature="2777:2856" ph="{...}" />
+            <marker date="1517873648552" expanded="true" signature="2892:4050" ph="{...}" />
+            <marker date="1517873648552" expanded="true" signature="2941:3726" ph="{...}" />
+            <marker date="1517873648552" expanded="true" signature="4121:4279" ph="{...}" />
+            <marker date="1517873648552" expanded="true" signature="4350:4508" ph="{...}" />
+            <marker date="1517873648552" expanded="true" signature="4579:4737" ph="{...}" />
+            <marker date="1517873648552" expanded="true" signature="4808:4966" ph="{...}" />
+            <marker date="1517873648552" expanded="true" signature="5037:5195" ph="{...}" />
+            <marker date="1517873648552" expanded="true" signature="5266:5424" ph="{...}" />
+            <marker date="1517873648552" expanded="true" signature="5499:5588" ph="{...}" />
+            <marker date="1517873648552" expanded="true" signature="5670:5792" ph="{...}" />
+            <marker date="1517873648552" expanded="true" signature="5873:6072" ph="{...}" />
+            <marker date="1517873648552" expanded="true" signature="6147:6234" ph="{...}" />
+            <marker date="1517873648552" expanded="true" signature="6311:6398" ph="{...}" />
+            <marker date="1517873648552" expanded="true" signature="6472:6542" ph="{...}" />
+            <marker date="1517873648552" expanded="true" signature="6605:6838" ph="{...}" />
+            <marker date="1517873648552" expanded="true" signature="6904:7198" ph="{...}" />
+            <marker date="1517873648552" expanded="true" signature="6954:7188" ph="{...}" />
+            <marker date="1517873648552" expanded="true" signature="7281:7326" ph="{...}" />
+            <marker date="1517873648552" expanded="true" signature="7405:7832" ph="{...}" />
+            <marker date="1517873648552" expanded="true" signature="7454:7822" ph="{...}" />
+            <marker date="1517873648552" expanded="true" signature="7911:8338" ph="{...}" />
+            <marker date="1517873648552" expanded="true" signature="7960:8328" ph="{...}" />
+            <marker date="1517873648552" expanded="true" signature="8417:8844" ph="{...}" />
+            <marker date="1517873648552" expanded="true" signature="8466:8834" ph="{...}" />
+            <marker date="1517873648552" expanded="true" signature="8923:9276" ph="{...}" />
+            <marker date="1517873648552" expanded="true" signature="8972:9266" ph="{...}" />
+            <marker date="1517873648552" expanded="true" signature="9355:9708" ph="{...}" />
+            <marker date="1517873648552" expanded="true" signature="9404:9698" ph="{...}" />
+            <marker date="1517873648552" expanded="true" signature="9787:10140" ph="{...}" />
+            <marker date="1517873648552" expanded="true" signature="9836:10130" ph="{...}" />
+            <marker date="1517873648552" expanded="true" signature="10209:10496" ph="{...}" />
+            <marker date="1517873648552" expanded="true" signature="10258:10486" ph="{...}" />
+            <marker date="1517873648552" expanded="true" signature="10573:10674" ph="{...}" />
+            <marker date="1517873648552" expanded="true" signature="10750:10934" ph="{...}" />
+            <marker date="1517873648552" expanded="true" signature="10787:10853" ph="{...}" />
+            <marker date="1517873648552" expanded="true" signature="11012:11082" ph="{...}" />
+            <marker date="1517873648552" expanded="true" signature="11173:11701" ph="{...}" />
+            <marker date="1517873648552" expanded="true" signature="11389:11661" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LiveScanServer/Program.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="4" column="18" lean-forward="true" selection-start-line="4" selection-start-column="18" selection-end-line="4" selection-end-column="18" />
+          <folding>
+            <marker date="1517873397063" expanded="false" signature="6:41" ph="..." />
+            <marker date="1517873397063" expanded="true" signature="66:423" ph="{...}" />
+            <marker date="1517873397063" expanded="true" signature="93:421" ph="{...}" />
+            <marker date="1517873397063" expanded="true" signature="103:193" ph="/// The main entry point for the application. ... " />
+            <marker date="1517873397063" expanded="true" signature="241:415" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ICP/main.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1009">
+          <caret line="24" column="26" lean-forward="true" selection-start-line="24" selection-start-column="26" selection-end-line="24" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/ICP/icp.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-315">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ICP/icp.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-153">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LiveScanClient/LiveScanClient.rc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/socketCS.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/LiveScanClient/iCapture.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-60">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/LiveScanClient/iMarker.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LiveScanServer/OpenGLWindow.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-383">
+          <caret line="567" column="17" lean-forward="false" selection-start-line="567" selection-start-column="17" selection-end-line="567" selection-end-column="17" />
+          <folding>
+            <marker date="1517873761857" expanded="true" signature="0:812" ph="/* Copyright (C) 2015  Marek Kowalski (M.Kowalski@ire.pw.edu.pl), Jacek Naruniec (J.Naruniec@ire.pw.edu.pl) ... */" />
+            <marker date="1517873761857" expanded="true" signature="820:1020" ph="..." />
+            <marker date="1517873761857" expanded="true" signature="1039:1112" ph="{...}" />
+            <marker date="1517873761857" expanded="true" signature="1137:24600" ph="{...}" />
+            <marker date="1517873761857" expanded="true" signature="1182:24598" ph="{...}" />
+            <marker date="1517873761857" expanded="true" signature="2513:2646" ph="{...}" />
+            <marker date="1517873761857" expanded="true" signature="2848:3312" ph="{...}" />
+            <marker date="1517873761857" expanded="true" signature="3352:3391" ph="{...}" />
+            <marker date="1517873761857" expanded="true" signature="3432:3893" ph="{...}" />
+            <marker date="1517873761857" expanded="true" signature="3465:3672" ph="{...}" />
+            <marker date="1517873761857" expanded="true" signature="3957:5130" ph="{...}" />
+            <marker date="1517873761857" expanded="true" signature="4036:4075" ph="{...}" />
+            <marker date="1517873761857" expanded="true" signature="4113:4203" ph="{...}" />
+            <marker date="1517873761857" expanded="true" signature="4242:4373" ph="{...}" />
+            <marker date="1517873761857" expanded="true" signature="5140:5229" ph="///Load resources here. ... " />
+            <marker date="1517873761857" expanded="true" signature="5282:6533" ph="{...}" />
+            <marker date="1517873761857" expanded="true" signature="5477:5600" ph="{...}" />
+            <marker date="1517873761857" expanded="true" signature="6589:6645" ph="{...}" />
+            <marker date="1517873761857" expanded="true" signature="6655:7015" ph="/// Called when your window is resized. Set your viewport here. It is also ... " />
+            <marker date="1517873761857" expanded="true" signature="7070:7478" ph="{...}" />
+            <marker date="1517873761857" expanded="true" signature="7551:7729" ph="{...}" />
+            <marker date="1517873761857" expanded="true" signature="7650:7719" ph="/* if (cameraPosition[2] &lt; 0) ... */" />
+            <marker date="1517873761857" expanded="true" signature="7793:9242" ph="{...}" />
+            <marker date="1517873761857" expanded="true" signature="7964:9139" ph="{...}" />
+            <marker date="1517873761857" expanded="true" signature="8334:8407" ph="/* targetPosition[0] -= dx; ... */" />
+            <marker date="1517873761857" expanded="true" signature="8655:8739" ph="/* if (cameraPosition[2] &lt; 0) ... */" />
+            <marker date="1517873761857" expanded="true" signature="9312:9374" ph="{...}" />
+            <marker date="1517873761857" expanded="true" signature="9446:9963" ph="{...}" />
+            <marker date="1517873761857" expanded="true" signature="9478:9874" ph="{...}" />
+            <marker date="1517873761857" expanded="true" signature="10029:12492" ph="{...}" />
+            <marker date="1517873761857" expanded="true" signature="10094:10343" ph="{...}" />
+            <marker date="1517873761857" expanded="true" signature="10604:11008" ph="{...}" />
+            <marker date="1517873761857" expanded="true" signature="11142:11735" ph="{...}" />
+            <marker date="1517873761857" expanded="true" signature="11776:12450" ph="{...}" />
+            <marker date="1517873761857" expanded="true" signature="11987:12119" ph="{...}" />
+            <marker date="1517873761857" expanded="true" signature="12185:12312" ph="{...}" />
+            <marker date="1517873761857" expanded="true" signature="12502:12694" ph="/// Called when it is time to render the next frame. Add your rendering code here. ... " />
+            <marker date="1517873761857" expanded="true" signature="12759:13916" ph="{...}" />
+            <marker date="1517873761857" expanded="true" signature="13111:13318" ph="/* Tell OpenGL to discard old VBO when done drawing it and reserve memory _now_ for a new buffer. ... */" />
+            <marker date="1517873761857" expanded="true" signature="13967:17234" ph="{...}" />
+            <marker date="1517873761857" expanded="true" signature="14163:14306" ph="{...}" />
+            <marker date="1517873761857" expanded="true" signature="14344:14388" ph="/* bottom vertices ... */" />
+            <marker date="1517873761857" expanded="true" signature="16240:16282" ph="/* top vertices ... */" />
+            <marker date="1517873761857" expanded="true" signature="17302:18712" ph="{...}" />
+            <marker date="1517873761857" expanded="true" signature="17497:17638" ph="{...}" />
+            <marker date="1517873761857" expanded="true" signature="18780:20217" ph="{...}" />
+            <marker date="1517873761857" expanded="true" signature="18983:19124" ph="{...}" />
+            <marker date="1517873761857" expanded="true" signature="20318:20596" ph="{...}" />
+            <marker date="1517873761857" expanded="true" signature="20642:24170" ph="{...}" />
+            <marker date="1517873761857" expanded="true" signature="20811:20952" ph="{...}" />
+            <marker date="1517873761857" expanded="true" signature="21047:24127" ph="{...}" />
+            <marker date="1517873761857" expanded="true" signature="24304:24592" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LiveScanServer/MainWindowForm.Designer.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-51">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1517873117002" expanded="false" signature="6:56" ph="..." />
+            <marker date="1517873117002" expanded="true" signature="80:10530" ph="{...}" />
+            <marker date="1517873117002" expanded="true" signature="115:10528" ph="{...}" />
+            <marker date="1517873117002" expanded="true" signature="130:206" ph="/// Required designer variable. ... " />
+            <marker date="1517873117002" expanded="true" signature="262:453" ph="/// Clean up any resources being used. ... " />
+            <marker date="1517873117002" expanded="true" signature="509:683" ph="{...}" />
+            <marker date="1517873117002" expanded="true" signature="570:636" ph="{...}" />
+            <marker date="1517873117002" expanded="true" signature="693:9873" ph="Windows Form Designer generated code" />
+            <marker date="1517873117002" expanded="true" signature="747:910" ph="/// Required method for Designer support - do not modify ... " />
+            <marker date="1517873117002" expanded="true" signature="953:9853" ph="{...}" />
+            <marker date="1517873117002" expanded="true" signature="2190:2232" ph="/* btStart ... */" />
+            <marker date="1517873117002" expanded="true" signature="2646:2692" ph="/* btCalibrate ... */" />
+            <marker date="1517873117002" expanded="true" signature="3139:3182" ph="/* btRecord ... */" />
+            <marker date="1517873117002" expanded="true" signature="3609:3658" ph="/* lClientListBox ... */" />
+            <marker date="1517873117002" expanded="true" signature="4044:4091" ph="/* statusStrip1 ... */" />
+            <marker date="1517873117002" expanded="true" signature="4178:4209" ph="{...}" />
+            <marker date="1517873117002" expanded="true" signature="4520:4566" ph="/* statusLabel ... */" />
+            <marker date="1517873117002" expanded="true" signature="4698:4748" ph="/* recordingWorker ... */" />
+            <marker date="1517873117002" expanded="true" signature="5101:5146" ph="/* txtSeqName ... */" />
+            <marker date="1517873117002" expanded="true" signature="5483:5531" ph="/* btRefineCalib ... */" />
+            <marker date="1517873117002" expanded="true" signature="6000:6047" ph="/* OpenGLWorker ... */" />
+            <marker date="1517873117002" expanded="true" signature="6320:6367" ph="/* savingWorker ... */" />
+            <marker date="1517873117002" expanded="true" signature="6705:6752" ph="/* updateWorker ... */" />
+            <marker date="1517873117002" expanded="true" signature="6942:6987" ph="/* btShowLive ... */" />
+            <marker date="1517873117002" expanded="true" signature="7427:7472" ph="/* btSettings ... */" />
+            <marker date="1517873117002" expanded="true" signature="7910:7957" ph="/* refineWorker ... */" />
+            <marker date="1517873117002" expanded="true" signature="8230:8274" ph="/* lbSeqName ... */" />
+            <marker date="1517873117002" expanded="true" signature="8613:8662" ph="/* MainWindowForm ... */" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LiveScanServer/MainWindowForm.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="688">
+          <caret line="437" column="79" lean-forward="false" selection-start-line="437" selection-start-column="79" selection-end-line="437" selection-end-column="79" />
+          <folding>
+            <marker date="1517874416786" expanded="true" signature="0:812" ph="/* Copyright (C) 2015  Marek Kowalski (M.Kowalski@ire.pw.edu.pl), Jacek Naruniec (J.Naruniec@ire.pw.edu.pl) ... */" />
+            <marker date="1517874416786" expanded="false" signature="820:1141" ph="..." />
+            <marker date="1517874416786" expanded="true" signature="1166:17431" ph="{...}" />
+            <marker date="1517874416786" expanded="true" signature="1215:17429" ph="{...}" />
+            <marker date="1517874416786" expanded="true" signature="1490:1634" ph="/* Those three variables are shared with the OpenGLWindow class and are used to exchange data with it. ... */" />
+            <marker date="1517874416786" expanded="true" signature="2357:3133" ph="{...}" />
+            <marker date="1517874416786" expanded="true" signature="2492:2773" ph="{...}" />
+            <marker date="1517874416786" expanded="true" signature="2792:2834" ph="{...}" />
+            <marker date="1517874416786" expanded="true" signature="2994:3086" ph="{...}" />
+            <marker date="1517874416786" expanded="true" signature="3213:3592" ph="{...}" />
+            <marker date="1517874416786" expanded="true" signature="3685:4075" ph="{...}" />
+            <marker date="1517874416786" expanded="true" signature="3766:3913" ph="{...}" />
+            <marker date="1517874416786" expanded="true" signature="4177:4341" ph="{...}" />
+            <marker date="1517874416786" expanded="true" signature="4219:4305" ph="{...}" />
+            <marker date="1517874416786" expanded="true" signature="4351:4499" ph="/* Performs recording which is synchronized frame capture. ... */" />
+            <marker date="1517874416786" expanded="true" signature="4578:4942" ph="{...}" />
+            <marker date="1517874416786" expanded="true" signature="4753:4932" ph="{...}" />
+            <marker date="1517874416786" expanded="true" signature="5046:5384" ph="{...}" />
+            <marker date="1517874416786" expanded="true" signature="5060:5221" ph="/* After recording has been terminated it is time to begin saving the frames. ... */" />
+            <marker date="1517874416786" expanded="true" signature="5498:6033" ph="{...}" />
+            <marker date="1517874416786" expanded="true" signature="6134:6223" ph="{...}" />
+            <marker date="1517874416786" expanded="true" signature="6300:8526" ph="{...}" />
+            <marker date="1517874416786" expanded="true" signature="6686:8516" ph="{...}" />
+            <marker date="1517874416786" expanded="true" signature="7182:7270" ph="{...}" />
+            <marker date="1517874416786" expanded="true" signature="7519:8130" ph="{...}" />
+            <marker date="1517874416786" expanded="true" signature="7806:8112" ph="{...}" />
+            <marker date="1517874416786" expanded="true" signature="8278:8502" ph="{...}" />
+            <marker date="1517874416786" expanded="true" signature="8627:9034" ph="{...}" />
+            <marker date="1517874416786" expanded="true" signature="9197:10471" ph="{...}" />
+            <marker date="1517874416786" expanded="true" signature="9463:10461" ph="{...}" />
+            <marker date="1517874416786" expanded="true" signature="9956:10164" ph="{...}" />
+            <marker date="1517874416786" expanded="true" signature="10598:14308" ph="{...}" />
+            <marker date="1517874416786" expanded="true" signature="10648:10772" ph="{...}" />
+            <marker date="1517874416786" expanded="true" signature="11283:11585" ph="{...}" />
+            <marker date="1517874416786" expanded="true" signature="11413:11508" ph="{...}" />
+            <marker date="1517874416786" expanded="true" signature="11599:11731" ph="/* Use ICP to refine the sensor poses. ... */" />
+            <marker date="1517874416786" expanded="true" signature="11824:13056" ph="{...}" />
+            <marker date="1517874416786" expanded="true" signature="11892:13042" ph="{...}" />
+            <marker date="1517874416786" expanded="true" signature="12029:12202" ph="{...}" />
+            <marker date="1517874416786" expanded="true" signature="13291:14151" ph="{...}" />
+            <marker date="1517874416786" expanded="true" signature="13424:13701" ph="{...}" />
+            <marker date="1517874416786" expanded="true" signature="13474:13572" ph="{...}" />
+            <marker date="1517874416786" expanded="true" signature="13747:14137" ph="{...}" />
+            <marker date="1517874416786" expanded="true" signature="13797:14119" ph="{...}" />
+            <marker date="1517874416786" expanded="true" signature="13851:13968" ph="{...}" />
+            <marker date="1517874416786" expanded="true" signature="14409:14600" ph="{...}" />
+            <marker date="1517874416786" expanded="true" signature="14761:15717" ph="{...}" />
+            <marker date="1517874416786" expanded="true" signature="14804:14946" ph="{...}" />
+            <marker date="1517874416786" expanded="true" signature="15048:15173" ph="{...}" />
+            <marker date="1517874416786" expanded="true" signature="15241:15597" ph="{...}" />
+            <marker date="1517874416786" expanded="true" signature="15786:15830" ph="{...}" />
+            <marker date="1517874416786" expanded="true" signature="15901:16267" ph="{...}" />
+            <marker date="1517874416786" expanded="true" signature="15944:16090" ph="{...}" />
+            <marker date="1517874416786" expanded="true" signature="16304:16400" ph="{...}" />
+            <marker date="1517874416786" expanded="true" signature="16468:16664" ph="{...}" />
+            <marker date="1517874416786" expanded="true" signature="16741:17107" ph="{...}" />
+            <marker date="1517874416786" expanded="true" signature="17277:17423" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LiveScanServer/KinectSocket.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="841">
+          <caret line="264" column="25" lean-forward="false" selection-start-line="264" selection-start-column="25" selection-end-line="264" selection-end-column="25" />
+          <folding>
+            <marker date="1517873974896" expanded="true" signature="0:812" ph="/* Copyright (C) 2015  Marek Kowalski (M.Kowalski@ire.pw.edu.pl), Jacek Naruniec (J.Naruniec@ire.pw.edu.pl) ... */" />
+            <marker date="1517873974896" expanded="false" signature="820:887" ph="..." />
+            <marker date="1517873974896" expanded="true" signature="912:9008" ph="{...}" />
+            <marker date="1517873974896" expanded="true" signature="994:9006" ph="{...}" />
+            <marker date="1517873974896" expanded="true" signature="1919:2041" ph="{...}" />
+            <marker date="1517873974896" expanded="true" signature="2078:2180" ph="{...}" />
+            <marker date="1517873974896" expanded="true" signature="2214:2423" ph="{...}" />
+            <marker date="1517873974896" expanded="true" signature="2483:2758" ph="{...}" />
+            <marker date="1517873974896" expanded="true" signature="2801:2950" ph="{...}" />
+            <marker date="1517873974896" expanded="true" signature="2991:3099" ph="{...}" />
+            <marker date="1517873974896" expanded="true" signature="3143:3616" ph="{...}" />
+            <marker date="1517873974896" expanded="true" signature="3658:3724" ph="{...}" />
+            <marker date="1517873974896" expanded="true" signature="3771:4554" ph="{...}" />
+            <marker date="1517873974896" expanded="true" signature="4302:4510" ph="{...}" />
+            <marker date="1517873974896" expanded="true" signature="4389:4496" ph="{...}" />
+            <marker date="1517873974896" expanded="true" signature="4591:8022" ph="{...}" />
+            <marker date="1517873974896" expanded="true" signature="4772:4855" ph="{...}" />
+            <marker date="1517873974896" expanded="true" signature="5075:5158" ph="{...}" />
+            <marker date="1517873974896" expanded="true" signature="5283:5555" ph="{...}" />
+            <marker date="1517873974896" expanded="true" signature="5332:5427" ph="{...}" />
+            <marker date="1517873974896" expanded="true" signature="5871:6314" ph="{...}" />
+            <marker date="1517873974896" expanded="true" signature="5917:5991" ph="{...}" />
+            <marker date="1517873974896" expanded="true" signature="6037:6300" ph="{...}" />
+            <marker date="1517873974896" expanded="true" signature="6487:8012" ph="{...}" />
+            <marker date="1517873974896" expanded="true" signature="6875:7958" ph="{...}" />
+            <marker date="1517873974896" expanded="true" signature="8066:8370" ph="{...}" />
+            <marker date="1517873974896" expanded="true" signature="8135:8289" ph="{...}" />
+            <marker date="1517873974896" expanded="true" signature="8410:8628" ph="{...}" />
+            <marker date="1517873974896" expanded="true" signature="8662:8711" ph="{...}" />
+            <marker date="1517873974896" expanded="true" signature="8753:9000" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LiveScanServer/KinectSettings.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="25" column="24" lean-forward="true" selection-start-line="25" selection-start-column="24" selection-end-line="25" selection-end-column="24" />
+          <folding>
+            <marker date="1517874040885" expanded="true" signature="0:812" ph="/* Copyright (C) 2015  Marek Kowalski (M.Kowalski@ire.pw.edu.pl), Jacek Naruniec (J.Naruniec@ire.pw.edu.pl) ... */" />
+            <marker date="1517874040885" expanded="false" signature="820:890" ph="..." />
+            <marker date="1517874040885" expanded="true" signature="915:3310" ph="{...}" />
+            <marker date="1517874040885" expanded="true" signature="968:3308" ph="{...}" />
+            <marker date="1517874040885" expanded="true" signature="1665:1872" ph="{...}" />
+            <marker date="1517874040885" expanded="true" signature="1913:3302" ph="{...}" />
+            <marker date="1517874040885" expanded="true" signature="2630:3102" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LiveScanPlayer/Program.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="14" column="21" lean-forward="false" selection-start-line="14" selection-start-column="21" selection-end-line="14" selection-end-column="21" />
+          <folding>
+            <marker date="1517874743138" expanded="false" signature="6:41" ph="..." />
+            <marker date="1517874743138" expanded="true" signature="68:427" ph="{...}" />
+            <marker date="1517874743138" expanded="true" signature="95:425" ph="{...}" />
+            <marker date="1517874743138" expanded="true" signature="105:195" ph="/// The main entry point for the application. ... " />
+            <marker date="1517874743138" expanded="true" signature="243:419" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LiveScanServer/KinectServer.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3706">
+          <caret line="223" column="12" lean-forward="false" selection-start-line="223" selection-start-column="12" selection-end-line="223" selection-end-column="12" />
+          <folding>
+            <marker date="1517874523131" expanded="true" signature="0:812" ph="/* Copyright (C) 2015  Marek Kowalski (M.Kowalski@ire.pw.edu.pl), Jacek Naruniec (J.Naruniec@ire.pw.edu.pl) ... */" />
+            <marker date="1517874523131" expanded="false" signature="820:969" ph="..." />
+            <marker date="1517874523131" expanded="true" signature="994:11798" ph="{...}" />
+            <marker date="1517874523131" expanded="true" signature="1103:11796" ph="{...}" />
+            <marker date="1517874523131" expanded="true" signature="1552:1770" ph="{...}" />
+            <marker date="1517874523131" expanded="true" signature="1570:1760" ph="{...}" />
+            <marker date="1517874523131" expanded="true" signature="1821:2419" ph="{...}" />
+            <marker date="1517874523131" expanded="true" signature="1839:2159" ph="{...}" />
+            <marker date="1517874523131" expanded="true" signature="2006:2090" ph="{...}" />
+            <marker date="1517874523131" expanded="true" signature="2176:2409" ph="{...}" />
+            <marker date="1517874523131" expanded="true" signature="2288:2377" ph="{...}" />
+            <marker date="1517874523131" expanded="true" signature="2474:3105" ph="{...}" />
+            <marker date="1517874523131" expanded="true" signature="2492:2840" ph="{...}" />
+            <marker date="1517874523131" expanded="true" signature="2669:2767" ph="{...}" />
+            <marker date="1517874523131" expanded="true" signature="2858:3095" ph="{...}" />
+            <marker date="1517874523131" expanded="true" signature="2970:3063" ph="{...}" />
+            <marker date="1517874523131" expanded="true" signature="3141:3572" ph="{...}" />
+            <marker date="1517874523131" expanded="true" signature="3159:3562" ph="{...}" />
+            <marker date="1517874523131" expanded="true" signature="3305:3491" ph="{...}" />
+            <marker date="1517874523131" expanded="true" signature="3356:3469" ph="{...}" />
+            <marker date="1517874523131" expanded="true" signature="3627:3672" ph="{...}" />
+            <marker date="1517874523131" expanded="true" signature="3715:3782" ph="{...}" />
+            <marker date="1517874523131" expanded="true" signature="3818:4360" ph="{...}" />
+            <marker date="1517874523131" expanded="true" signature="4395:4596" ph="{...}" />
+            <marker date="1517874523131" expanded="true" signature="4645:5169" ph="{...}" />
+            <marker date="1517874523131" expanded="true" signature="4909:5159" ph="{...}" />
+            <marker date="1517874523131" expanded="true" signature="5059:5127" ph="{...}" />
+            <marker date="1517874523131" expanded="true" signature="5203:5382" ph="{...}" />
+            <marker date="1517874523131" expanded="true" signature="5299:5358" ph="{...}" />
+            <marker date="1517874523131" expanded="true" signature="5419:5610" ph="{...}" />
+            <marker date="1517874523131" expanded="true" signature="5515:5586" ph="{...}" />
+            <marker date="1517874523131" expanded="true" signature="5654:5843" ph="{...}" />
+            <marker date="1517874523131" expanded="true" signature="5750:5819" ph="{...}" />
+            <marker date="1517874523131" expanded="true" signature="5939:7449" ph="{...}" />
+            <marker date="1517874523131" expanded="true" signature="6457:6983" ph="{...}" />
+            <marker date="1517874523131" expanded="true" signature="6609:6943" ph="{...}" />
+            <marker date="1517874523131" expanded="true" signature="6673:6796" ph="{...}" />
+            <marker date="1517874523131" expanded="true" signature="7127:7301" ph="{...}" />
+            <marker date="1517874523131" expanded="true" signature="7609:8790" ph="{...}" />
+            <marker date="1517874523131" expanded="true" signature="8074:8358" ph="{...}" />
+            <marker date="1517874523131" expanded="true" signature="8242:8318" ph="{...}" />
+            <marker date="1517874523131" expanded="true" signature="8502:8748" ph="{...}" />
+            <marker date="1517874523131" expanded="true" signature="8832:9019" ph="{...}" />
+            <marker date="1517874523131" expanded="true" signature="8928:8995" ph="{...}" />
+            <marker date="1517874523131" expanded="true" signature="9060:9979" ph="{...}" />
+            <marker date="1517874523131" expanded="true" signature="9097:9855" ph="{...}" />
+            <marker date="1517874523131" expanded="true" signature="9119:9777" ph="{...}" />
+            <marker date="1517874523131" expanded="true" signature="10020:11790" ph="{...}" />
+            <marker date="1517874523131" expanded="true" signature="10256:10474" ph="{...}" />
+            <marker date="1517874523131" expanded="true" signature="10587:11738" ph="{...}" />
+            <marker date="1517874523131" expanded="true" signature="10691:11671" ph="{...}" />
+            <marker date="1517874523131" expanded="true" signature="10801:11649" ph="{...}" />
+            <marker date="1517874523131" expanded="true" signature="10851:10944" ph="{...}" />
+            <marker date="1517874523131" expanded="true" signature="10970:11066" ph="{...}" />
+            <marker date="1517874523131" expanded="true" signature="11163:11317" ph="{...}" />
+            <marker date="1517874523131" expanded="true" signature="11412:11566" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LiveScanServer/Utils.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="705">
+          <caret line="170" column="0" lean-forward="false" selection-start-line="170" selection-start-column="0" selection-end-line="170" selection-end-column="0" />
+          <folding>
+            <marker date="1517874523615" expanded="true" signature="0:812" ph="/* Copyright (C) 2015  Marek Kowalski (M.Kowalski@ire.pw.edu.pl), Jacek Naruniec (J.Naruniec@ire.pw.edu.pl) ... */" />
+            <marker date="1517874523615" expanded="false" signature="820:906" ph="..." />
+            <marker date="1517874523615" expanded="true" signature="931:6411" ph="{...}" />
+            <marker date="1517874523615" expanded="true" signature="959:1014" ph="{...}" />
+            <marker date="1517874523615" expanded="true" signature="1042:1121" ph="{...}" />
+            <marker date="1517874523615" expanded="true" signature="1175:1592" ph="{...}" />
+            <marker date="1517874523615" expanded="true" signature="1297:1586" ph="{...}" />
+            <marker date="1517874523615" expanded="true" signature="1339:1576" ph="{...}" />
+            <marker date="1517874523615" expanded="true" signature="1385:1535" ph="{...}" />
+            <marker date="1517874523615" expanded="true" signature="1641:3103" ph="{...}" />
+            <marker date="1517874523615" expanded="true" signature="1770:1817" ph="{...}" />
+            <marker date="1517874523615" expanded="true" signature="1881:1995" ph="{...}" />
+            <marker date="1517874523615" expanded="true" signature="2071:2148" ph="{...}" />
+            <marker date="1517874523615" expanded="true" signature="2194:3054" ph="{...}" />
+            <marker date="1517874523615" expanded="true" signature="3135:3250" ph="{...}" />
+            <marker date="1517874523615" expanded="true" signature="3278:4181" ph="{...}" />
+            <marker date="1517874523615" expanded="true" signature="4207:4327" ph="{...}" />
+            <marker date="1517874523615" expanded="true" signature="4352:4475" ph="{...}" />
+            <marker date="1517874523615" expanded="true" signature="4507:6409" ph="{...}" />
+            <marker date="1517874523615" expanded="true" signature="4617:6403" ph="{...}" />
+            <marker date="1517874523615" expanded="true" signature="5442:5827" ph="{...}" />
+            <marker date="1517874523615" expanded="true" signature="5505:5813" ph="{...}" />
+            <marker date="1517874523615" expanded="true" signature="5668:5795" ph="{...}" />
+            <marker date="1517874523615" expanded="true" signature="5896:6278" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LiveScanPlayer/FrameFileReaderPly.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="19" column="32" lean-forward="false" selection-start-line="19" selection-start-column="32" selection-end-line="19" selection-end-column="32" />
+          <folding>
+            <marker date="1517874857166" expanded="false" signature="6:83" ph="..." />
+            <marker date="1517874857166" expanded="true" signature="110:2081" ph="{...}" />
+            <marker date="1517874857166" expanded="true" signature="169:2079" ph="{...}" />
+            <marker date="1517874857166" expanded="true" signature="310:357" ph="{...}" />
+            <marker date="1517874857166" expanded="true" signature="387:474" ph="{...}" />
+            <marker date="1517874857166" expanded="true" signature="547:1439" ph="{...}" />
+            <marker date="1517874857166" expanded="true" signature="1022:1272" ph="{...}" />
+            <marker date="1517874857166" expanded="true" signature="1068:1142" ph="{...}" />
+            <marker date="1517874857166" expanded="true" signature="1188:1258" ph="{...}" />
+            <marker date="1517874857166" expanded="true" signature="1487:1632" ph="{...}" />
+            <marker date="1517874857166" expanded="true" signature="1663:1708" ph="{...}" />
+            <marker date="1517874857166" expanded="true" signature="1776:2073" ph="{...}" />
+            <marker date="1517874857166" expanded="true" signature="1911:2023" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LiveScanPlayer/PlayerWindowForm.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="87">
+          <caret line="41" column="26" lean-forward="false" selection-start-line="41" selection-start-column="26" selection-end-line="41" selection-end-column="26" />
+          <folding>
+            <marker date="1517874786223" expanded="false" signature="6:165" ph="..." />
+            <marker date="1517874786223" expanded="true" signature="192:6645" ph="{...}" />
+            <marker date="1517874786223" expanded="true" signature="243:6643" ph="{...}" />
+            <marker date="1517874786223" expanded="true" signature="735:1013" ph="{...}" />
+            <marker date="1517874786223" expanded="true" signature="1104:1193" ph="{...}" />
+            <marker date="1517874786223" expanded="true" signature="1259:1697" ph="{...}" />
+            <marker date="1517874786223" expanded="true" signature="1453:1673" ph="{...}" />
+            <marker date="1517874786223" expanded="true" signature="1767:2228" ph="{...}" />
+            <marker date="1517874786223" expanded="true" signature="2293:2702" ph="{...}" />
+            <marker date="1517874786223" expanded="true" signature="2374:2529" ph="{...}" />
+            <marker date="1517874786223" expanded="true" signature="2768:3081" ph="{...}" />
+            <marker date="1517874786223" expanded="true" signature="3147:3391" ph="{...}" />
+            <marker date="1517874786223" expanded="true" signature="3242:3367" ph="{...}" />
+            <marker date="1517874786223" expanded="true" signature="3455:3551" ph="{...}" />
+            <marker date="1517874786223" expanded="true" signature="3628:4975" ph="{...}" />
+            <marker date="1517874786223" expanded="true" signature="3795:4923" ph="{...}" />
+            <marker date="1517874786223" expanded="true" signature="4035:4346" ph="{...}" />
+            <marker date="1517874786223" expanded="true" signature="5052:5239" ph="{...}" />
+            <marker date="1517874786223" expanded="true" signature="5102:5194" ph="{...}" />
+            <marker date="1517874786223" expanded="true" signature="5322:5395" ph="{...}" />
+            <marker date="1517874786223" expanded="true" signature="5490:5860" ph="{...}" />
+            <marker date="1517874786223" expanded="true" signature="5666:5742" ph="{...}" />
+            <marker date="1517874786223" expanded="true" signature="5913:6155" ph="{...}" />
+            <marker date="1517874786223" expanded="true" signature="6008:6131" ph="{...}" />
+            <marker date="1517874786223" expanded="true" signature="6230:6637" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LiveScanPlayer/IFrameFileReader.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="29" lean-forward="true" selection-start-line="4" selection-start-column="29" selection-end-line="4" selection-end-column="29" />
+          <folding>
+            <marker date="1517874743138" expanded="true" signature="60:277" ph="{...}" />
+            <marker date="1517874743138" expanded="true" signature="102:275" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LiveScanPlayer/FrameFileReaderBin.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="654">
+          <caret line="86" column="34" lean-forward="false" selection-start-line="86" selection-start-column="34" selection-end-line="86" selection-end-column="34" />
+          <folding>
+            <marker date="1517875049684" expanded="false" signature="6:83" ph="..." />
+            <marker date="1517875049684" expanded="true" signature="110:3131" ph="{...}" />
+            <marker date="1517875049684" expanded="true" signature="160:3129" ph="{...}" />
+            <marker date="1517875049684" expanded="true" signature="305:398" ph="{...}" />
+            <marker date="1517875049684" expanded="true" signature="430:478" ph="{...}" />
+            <marker date="1517875049684" expanded="true" signature="508:595" ph="{...}" />
+            <marker date="1517875049684" expanded="true" signature="668:2362" ph="{...}" />
+            <marker date="1517875049684" expanded="true" signature="695:2352" ph="{...}" />
+            <marker date="1517875049684" expanded="true" signature="1574:1653" ph="{...}" />
+            <marker date="1517875049684" expanded="true" signature="2012:2235" ph="{...}" />
+            <marker date="1517875049684" expanded="true" signature="2062:2217" ph="{...}" />
+            <marker date="1517875049684" expanded="true" signature="2410:2648" ph="{...}" />
+            <marker date="1517875049684" expanded="true" signature="2481:2638" ph="{...}" />
+            <marker date="1517875049684" expanded="true" signature="2679:2788" ph="{...}" />
+            <marker date="1517875049684" expanded="true" signature="2824:3123" ph="{...}" />
+            <marker date="1517875049684" expanded="true" signature="2960:3073" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LiveScanServer/ZSTDDecompressor.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="9" column="53" lean-forward="false" selection-start-line="9" selection-start-column="53" selection-end-line="9" selection-end-column="53" />
+          <folding>
+            <marker date="1517873234426" expanded="false" signature="6:82" ph="..." />
+            <marker date="1517873234426" expanded="true" signature="107:1239" ph="{...}" />
+            <marker date="1517873234426" expanded="true" signature="152:1237" ph="{...}" />
+            <marker date="1517873234426" expanded="true" signature="663:1231" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

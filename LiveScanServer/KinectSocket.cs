@@ -12,57 +12,52 @@
 //        title={LiveScan3D: A Fast and Inexpensive 3D Data Acquisition System for Multiple Kinect v2 Sensors},
 //        year={2015},
 //    }
+
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Net.Sockets;
 
-
-namespace KinectServer
-{
+namespace KinectServer {
     public delegate void SocketChangedHandler();
 
-    public class KinectSocket
-    {
+    public class KinectSocket {
         Socket oSocket;
         byte[] byteToSend = new byte[1];
-        public bool bFrameCaptured = false;
-        public bool bLatestFrameReceived = false;
-        public bool bStoredFrameReceived = false;
+        public bool bFrameCaptured;
+        public bool bLatestFrameReceived;
+        public bool bStoredFrameReceived;
         public bool bNoMoreStoredFrames = true;
-        public bool bCalibrated = false;
+
+        public bool bCalibrated;
+
         //The pose of the sensor in the scene (used by the OpenGLWindow to show the sensor)
         public AffineTransform oCameraPose = new AffineTransform();
+
         //The transform that maps the vertices in the sensor coordinate system to the world corrdinate system.
         public AffineTransform oWorldTransform = new AffineTransform();
 
         public string sSocketState;
 
         public List<byte> lFrameRGB = new List<byte>();
-        public List<Single> lFrameVerts = new List<Single>();
-        public List<Body> lBodies = new List<Body>(); 
+        public List<float> lFrameVerts = new List<float>();
+        public List<Body> lBodies = new List<Body>();
 
         public event SocketChangedHandler eChanged;
 
-        public KinectSocket(Socket clientSocket)
-        {
+        public KinectSocket(Socket clientSocket) {
             oSocket = clientSocket;
-            sSocketState = oSocket.RemoteEndPoint.ToString() + " Calibrated = false";
+            sSocketState = oSocket.RemoteEndPoint + " Calibrated = false";
         }
 
-        public void CaptureFrame()
-        {
+        public void CaptureFrame() {
             bFrameCaptured = false;
             byteToSend[0] = 0;
             SendByte();
         }
 
-        public void Calibrate()
-        {            
+        public void Calibrate() {
             bCalibrated = false;
-            sSocketState = oSocket.RemoteEndPoint.ToString() + " Calibrated = false";
+            sSocketState = oSocket.RemoteEndPoint + " Calibrated = false";
 
             byteToSend[0] = 1;
             SendByte();
@@ -70,11 +65,10 @@ namespace KinectServer
             UpdateSocketState();
         }
 
-        public void SendSettings(KinectSettings settings)
-        {
-            List<byte> lData = settings.ToByteList();
+        public void SendSettings(KinectSettings settings) {
+            var lData = settings.ToByteList();
 
-            byte[] bTemp = BitConverter.GetBytes(lData.Count);
+            var bTemp = BitConverter.GetBytes(lData.Count);
             lData.InsertRange(0, bTemp);
             lData.Insert(0, 2);
 
@@ -82,26 +76,23 @@ namespace KinectServer
                 oSocket.Send(lData.ToArray());
         }
 
-        public void RequestStoredFrame()
-        {
+        public void RequestStoredFrame() {
             byteToSend[0] = 3;
             SendByte();
             bNoMoreStoredFrames = false;
             bStoredFrameReceived = false;
         }
 
-        public void RequestLastFrame()
-        {
+        public void RequestLastFrame() {
             byteToSend[0] = 4;
             SendByte();
             bLatestFrameReceived = false;
         }
 
-        public void SendCalibrationData()
-        {
-            int size = 1 + (9 + 3) * sizeof(float);
-            byte[] data = new byte[size];
-            int i = 0;
+        public void SendCalibrationData() {
+            var size = 1 + (9 + 3) * sizeof(float);
+            var data = new byte[size];
+            var i = 0;
 
             data[i] = 5;
             i++;
@@ -115,19 +106,17 @@ namespace KinectServer
                 oSocket.Send(data);
         }
 
-        public void ClearStoredFrames()
-        {
+        public void ClearStoredFrames() {
             byteToSend[0] = 6;
             SendByte();
         }
 
-        public void ReceiveCalibrationData()
-        {
+        public void ReceiveCalibrationData() {
             bCalibrated = true;
 
-            byte[] buffer = Receive(sizeof(int) * 1);
+            var buffer = Receive(sizeof(int) * 1);
             //currently not used
-            int markerId = BitConverter.ToInt32(buffer, 0);
+            var markerId = BitConverter.ToInt32(buffer, 0);
 
             buffer = Receive(sizeof(float) * 9);
             Buffer.BlockCopy(buffer, 0, oWorldTransform.R, 0, sizeof(float) * 9);
@@ -136,11 +125,9 @@ namespace KinectServer
             Buffer.BlockCopy(buffer, 0, oWorldTransform.t, 0, sizeof(float) * 3);
 
             oCameraPose.R = oWorldTransform.R;
-            for (int i = 0; i < 3; i++)
-            {
+            for (var i = 0; i < 3; i++) {
                 oCameraPose.t[i] = 0.0f;
-                for (int j = 0; j < 3; j++)
-                {
+                for (var j = 0; j < 3; j++) {
                     oCameraPose.t[i] += oWorldTransform.t[j] * oWorldTransform.R[i, j];
                 }
             }
@@ -148,65 +135,55 @@ namespace KinectServer
             UpdateSocketState();
         }
 
-        public void ReceiveFrame()
-        {
+        public void ReceiveFrame() {
             lFrameRGB.Clear();
             lFrameVerts.Clear();
             lBodies.Clear();
 
-            int nToRead;
-            byte[] buffer = new byte[1024];
+            var buffer = new byte[1024];
 
-            while (oSocket.Available == 0)
-            {
+            while (oSocket.Available == 0) {
                 if (!SocketConnected())
                     return;
             }
 
             oSocket.Receive(buffer, 8, SocketFlags.None);
-            nToRead = BitConverter.ToInt32(buffer, 0);
-            int iCompressed = BitConverter.ToInt32(buffer, 4);
+            var bitsToRead = BitConverter.ToInt32(buffer, 0);
+            var iCompressed = BitConverter.ToInt32(buffer, 4);
 
-            if (nToRead == -1)
-            {
+            if (bitsToRead == -1) {
                 bNoMoreStoredFrames = true;
                 return;
             }
 
-            buffer = new byte[nToRead];
-            int nAlreadyRead = 0;
+            buffer = new byte[bitsToRead];
+            var alreadyRead = 0;
 
-            while (nAlreadyRead != nToRead)
-            {
-                while (oSocket.Available == 0)
-                {
+            while (alreadyRead != bitsToRead) {
+                while (oSocket.Available == 0) {
                     if (!SocketConnected())
                         return;
                 }
 
-                nAlreadyRead += oSocket.Receive(buffer, nAlreadyRead, nToRead - nAlreadyRead, SocketFlags.None);
+                alreadyRead += oSocket.Receive(buffer, alreadyRead, bitsToRead - alreadyRead, SocketFlags.None);
             }
-
-            
 
 
             if (iCompressed == 1)
-                buffer = ZSTDDecompressor.Decompress(buffer);
+                buffer = ZstdDecompressor.Decompress(buffer);
 
             //Receive depth and color data
-            int startIdx = 0;
+            var startIdx = 0;
 
-            int n_vertices = BitConverter.ToInt32(buffer, startIdx);
+            var vertices = BitConverter.ToInt32(buffer, startIdx);
             startIdx += 4;
 
-            for (int i = 0; i < n_vertices; i++)
-            {
-                for (int j = 0; j < 3; j++)
-                {
+            for (var i = 0; i < vertices; i++) {
+                for (var j = 0; j < 3; j++) {
                     lFrameRGB.Add(buffer[startIdx++]);
                 }
-                for (int j = 0; j < 3; j++)
-                {
+
+                for (var j = 0; j < 3; j++) {
                     float val = BitConverter.ToInt16(buffer, startIdx);
                     //converting from milimeters to meters
                     val /= 1000.0f;
@@ -216,26 +193,23 @@ namespace KinectServer
             }
 
             //Receive body data
-            int nBodies = BitConverter.ToInt32(buffer, startIdx);
+            var nBodies = BitConverter.ToInt32(buffer, startIdx);
             startIdx += 4;
-            for (int i = 0; i < nBodies; i++)
-            {
-                Body tempBody = new Body();
-                tempBody.bTracked = BitConverter.ToBoolean(buffer, startIdx++);
-                int nJoints = BitConverter.ToInt32(buffer, startIdx);
+            for (var i = 0; i < nBodies; i++) {
+                var tempBody = new Body {bTracked = BitConverter.ToBoolean(buffer, startIdx++)};
+                var nJoints = BitConverter.ToInt32(buffer, startIdx);
                 startIdx += 4;
 
                 tempBody.lJoints = new List<Joint>(nJoints);
                 tempBody.lJointsInColorSpace = new List<Point2f>(nJoints);
 
-                for (int j = 0; j < nJoints; j++)
-                {
-                    Joint tempJoint = new Joint();
-                    Point2f tempPoint = new Point2f();
+                for (var j = 0; j < nJoints; j++) {
+                    var tempJoint = new Joint();
+                    var tempPoint = new Point2f();
 
-                    tempJoint.jointType = (JointType)BitConverter.ToInt32(buffer, startIdx);
+                    tempJoint.jointType = (JointType) BitConverter.ToInt32(buffer, startIdx);
                     startIdx += 4;
-                    tempJoint.trackingState = (TrackingState)BitConverter.ToInt32(buffer, startIdx);
+                    tempJoint.trackingState = (TrackingState) BitConverter.ToInt32(buffer, startIdx);
                     startIdx += 4;
                     tempJoint.position.X = BitConverter.ToSingle(buffer, startIdx);
                     startIdx += 4;
@@ -257,49 +231,38 @@ namespace KinectServer
             }
         }
 
-        public byte[] Receive(int nBytes)
-        {
+        public byte[] Receive(int nBytes) {
             byte[] buffer;
-            if (oSocket.Available != 0)
-            {
+            if (oSocket.Available != 0) {
                 buffer = new byte[Math.Min(nBytes, oSocket.Available)];
                 oSocket.Receive(buffer, nBytes, SocketFlags.None);
-            }
-            else
+            } else
                 buffer = new byte[0];
 
             return buffer;
         }
 
-        public bool SocketConnected()
-        {
-            bool part1 = oSocket.Poll(1000, SelectMode.SelectRead);
-            bool part2 = (oSocket.Available == 0);
+        public bool SocketConnected() {
+            var part1 = oSocket.Poll(1000, SelectMode.SelectRead);
+            var part2 = (oSocket.Available == 0);
 
-            if (part1 && part2)
-            {
+            if (part1 && part2) 
                 return false;
-            }
-            else
-            {
-                return true;
-            }
+
+            return true;
         }
 
-        private void SendByte()
-        {
+        private void SendByte() {
             oSocket.Send(byteToSend);
         }
 
-        public void UpdateSocketState()
-        {
+        public void UpdateSocketState() {
             if (bCalibrated)
-                sSocketState = oSocket.RemoteEndPoint.ToString() + " Calibrated = true";
+                sSocketState = oSocket.RemoteEndPoint + " Calibrated = true";
             else
-                sSocketState = oSocket.RemoteEndPoint.ToString() + " Calibrated = false";
+                sSocketState = oSocket.RemoteEndPoint + " Calibrated = false";
 
-            if (eChanged != null)
-                eChanged();
+            eChanged?.Invoke();
         }
     }
 }

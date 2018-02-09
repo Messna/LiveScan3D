@@ -1,11 +1,14 @@
-﻿namespace KinectServer
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace KinectServer
 {
     partial class MainWindowForm
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -205,22 +208,22 @@
 
         #endregion
 
-        private System.Windows.Forms.Button btStart;
-        private System.Windows.Forms.Button btCalibrate;
-        private System.Windows.Forms.Button btRecord;
-        private System.Windows.Forms.ListBox lClientListBox;
-        private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.ComponentModel.BackgroundWorker recordingWorker;
-        private System.Windows.Forms.TextBox txtSeqName;
-        private System.Windows.Forms.Button btRefineCalib;
-        private System.ComponentModel.BackgroundWorker OpenGLWorker;
-        private System.ComponentModel.BackgroundWorker savingWorker;
-        private System.ComponentModel.BackgroundWorker updateWorker;
-        private System.Windows.Forms.Button btShowLive;
-        private System.Windows.Forms.Button btSettings;
-        private System.ComponentModel.BackgroundWorker refineWorker;
-        private System.Windows.Forms.ToolStripStatusLabel statusLabel;
-        private System.Windows.Forms.Label lbSeqName;
+        private Button btStart;
+        private Button btCalibrate;
+        private Button btRecord;
+        private ListBox lClientListBox;
+        private StatusStrip statusStrip1;
+        private BackgroundWorker recordingWorker;
+        private TextBox txtSeqName;
+        private Button btRefineCalib;
+        private BackgroundWorker OpenGLWorker;
+        private BackgroundWorker savingWorker;
+        private BackgroundWorker updateWorker;
+        private Button btShowLive;
+        private Button btSettings;
+        private BackgroundWorker refineWorker;
+        private ToolStripStatusLabel statusLabel;
+        private Label lbSeqName;
     }
 }
 

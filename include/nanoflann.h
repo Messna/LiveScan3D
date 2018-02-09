@@ -81,7 +81,7 @@ namespace nanoflann
 		CountType count;
 
 	public:
-		inline KNNResultSet(CountType capacity_) : indices(0), dists(0), capacity(capacity_), count(0)
+		inline KNNResultSet(CountType capacity_) : indices(nullptr), dists(nullptr), capacity(capacity_), count(0)
 		{
 		}
 
@@ -477,7 +477,7 @@ namespace nanoflann
 		void internal_init()
 		{
 			remaining = 0;
-			base = NULL;
+			base = nullptr;
 			usedMemory = 0;
 			wastedMemory = 0;
 		}
@@ -503,7 +503,7 @@ namespace nanoflann
 		/** Frees all allocated memory chunks */
 		void free_all()
 		{
-			while (base != NULL) {
+			while (base != nullptr) {
 				void *prev = *(static_cast<void**>(base)); /* Get pointer to prev block. */
 				::free(base);
 				base = prev;
@@ -538,7 +538,7 @@ namespace nanoflann
 				void* m = ::malloc(blocksize);
 				if (!m) {
 					fprintf(stderr, "Failed to allocate memory.\n");
-					return NULL;
+					return nullptr;
 				}
 
 				/* Fill first word of new block with pointer to previous block. */
@@ -830,7 +830,7 @@ namespace nanoflann
 		* @param params Basically, the maximum leaf node size
 		*/
 		KDTreeSingleIndexAdaptor(const int dimensionality, const DatasetAdaptor& inputData, const KDTreeSingleIndexAdaptorParams& params = KDTreeSingleIndexAdaptorParams()) :
-			dataset(inputData), index_params(params), root_node(NULL), distance(inputData)
+			dataset(inputData), index_params(params), root_node(nullptr), distance(inputData)
 		{
 			m_size = dataset.kdtree_get_point_count();
 			m_size_at_index_build = m_size;

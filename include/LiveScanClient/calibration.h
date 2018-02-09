@@ -17,41 +17,39 @@
 #include "marker.h"
 #include "utils.h"
 
-vector<float> RotatePoint(vector<float> &point, std::vector<std::vector<float>> &R);
-vector<float> InverseRotatePoint(vector<float> &point, std::vector<std::vector<float>> &R);
+vector<float> RotatePoint(vector<float>& point, std::vector<std::vector<float>>& R);
+vector<float> InverseRotatePoint(vector<float>& point, std::vector<std::vector<float>>& R);
 
-struct MarkerPose
-{
-	int markerId;
+struct MarkerPose {
+	int marker_id;
 	float R[3][3];
 	float t[3];
 };
 
-class Calibration
-{
+class calibration {
 public:
-	vector<float> worldT;
-	vector<vector<float>> worldR;
-	int iUsedMarkerId;
+	vector<float> world_t;
+	vector<vector<float>> world_r;
+	int used_marker_id{};
 
-	vector<MarkerPose> markerPoses;
+	// User defined markers
+	vector<MarkerPose> marker_poses;
 
-	bool bCalibrated;
+	bool calibrated;
 
-	Calibration();
-	~Calibration();
+	calibration();
+	~calibration();
 
-	bool Calibrate(RGB *pBuffer, Point3f *pCameraCoordinates, int cColorWidth, int cColorHeight);
-	bool LoadCalibration();
-	void SaveCalibration();
+	bool calibrate(RGB* buffer, Point3f* camera_coordinates, int color_width, int color_height);
+	bool load_calibration();
+	void save_calibration();
 private:
-	IMarker *pDetector;
-	int nSampleCounter;
-	int nRequiredSamples;
+	IMarker* detector_;
+	int sample_counter_;
+	int required_samples_;
 
-	vector<vector<Point3f>> marker3DSamples;
+	vector<vector<Point3f>> marker3d_samples_;
 
-	void Procrustes(MarkerInfo &marker, vector<Point3f> &markerInWorld, vector<float> &markerT, vector<vector<float>> &markerR);
-	bool GetMarkerCorners3D(vector<Point3f> &marker3D, MarkerInfo &marker, Point3f *pCameraCoordinates, int cColorWidth, int cColorHeight);
+	void procrustes(MarkerInfo& marker, vector<Point3f>& marker_in_world, vector<float>& world_to_marker_t, vector<vector<float>>& world_to_marker_r) const;
+	static bool get_marker_corners_3d(vector<Point3f>& marker_3d, MarkerInfo& marker, Point3f* camera_coordinates, int color_width);
 };
-

@@ -12,431 +12,325 @@
 //        title={LiveScan3D: A Fast and Inexpensive 3D Data Acquisition System for Multiple Kinect v2 Sensors},
 //        year={2015},
 //    }
-using System;
+
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Threading;
-
-using System.Net.Sockets;
 using System.Net;
-using System.ComponentModel;
+using System.Net.Sockets;
+using System.Threading;
+using Timer = System.Timers.Timer;
 
-namespace KinectServer
-{
+namespace KinectServer {
     public delegate void SocketListChangedHandler(List<KinectSocket> list);
-    public class KinectServer
-    {
-        Socket oServerSocket;
 
-        bool bServerRunning = false;
+    public class KinectServer {
+        private Socket _serverSocket;
 
-        KinectSettings oSettings;
-        object oClientSocketLock = new object();
-        object oFrameRequestLock = new object();
+        private bool _serverRunning;
 
-        List<KinectSocket> lClientSockets = new List<KinectSocket>();
+        private readonly KinectSettings _settings;
+        private readonly object _clientSocketLock = new object();
+        private readonly object _frameRequestLock = new object();
 
-        public event SocketListChangedHandler eSocketListChanged;
+        private readonly List<KinectSocket> _clientSockets = new List<KinectSocket>();
 
-        public int nClientCount
-        {
-            get
-            {
-                int nClients;
-                lock (oClientSocketLock)
-                {
-                    nClients = lClientSockets.Count;
+        public event SocketListChangedHandler ESocketListChanged;
+
+        public int ClientCount {
+            get {
+                int clients;
+                lock (_clientSocketLock) {
+                    clients = _clientSockets.Count;
                 }
-                return nClients;
+
+                return clients;
             }
         }
 
-        public List<AffineTransform> lCameraPoses
-        {
-            get 
-            {
-                List<AffineTransform> cameraPoses = new List<AffineTransform>();
-                lock (oClientSocketLock)
-                {
-                    for (int i = 0; i < lClientSockets.Count; i++)
-                    {
-                        cameraPoses.Add(lClientSockets[i].oCameraPose);
-                    }                    
+        public List<AffineTransform> CameraPoses {
+            get {
+                var cameraPoses = new List<AffineTransform>();
+                lock (_clientSocketLock) {
+                    foreach (var socket in _clientSockets) {
+                        cameraPoses.Add(socket.oCameraPose);
+                    }
                 }
+
                 return cameraPoses;
             }
-            set
-            {
-                lock (oClientSocketLock)
-                {
-                    for (int i = 0; i < lClientSockets.Count; i++)
-                    {
-                        lClientSockets[i].oCameraPose = value[i];
+            set {
+                lock (_clientSocketLock) {
+                    for (var i = 0; i < _clientSockets.Count; i++) {
+                        _clientSockets[i].oCameraPose = value[i];
                     }
                 }
             }
         }
 
-        public List<AffineTransform> lWorldTransforms
-        {
-            get
-            {
-                List<AffineTransform> worldTransforms = new List<AffineTransform>();
-                lock (oClientSocketLock)
-                {
-                    for (int i = 0; i < lClientSockets.Count; i++)
-                    {
-                        worldTransforms.Add(lClientSockets[i].oWorldTransform);
+        public List<AffineTransform> WorldTransforms {
+            get {
+                var worldTransforms = new List<AffineTransform>();
+                lock (_clientSocketLock) {
+                    foreach (var clientSocket in _clientSockets) {
+                        worldTransforms.Add(clientSocket.oWorldTransform);
                     }
                 }
+
                 return worldTransforms;
             }
 
-            set
-            {
-                lock (oClientSocketLock)
-                {
-                    for (int i = 0; i < lClientSockets.Count; i++)
-                    {
-                        lClientSockets[i].oWorldTransform = value[i];
+            set {
+                lock (_clientSocketLock) {
+                    for (var i = 0; i < _clientSockets.Count; i++) {
+                        _clientSockets[i].oWorldTransform = value[i];
                     }
                 }
             }
         }
 
-        public bool bAllCalibrated
-        {
-            get
-            {
-                bool allCalibrated = true;
-                lock (oClientSocketLock)
-                {
-                    for (int i = 0; i < lClientSockets.Count; i++)
-                    {
-                        if (!lClientSockets[i].bCalibrated)
-                        {
+        public bool AllCalibrated {
+            get {
+                var allCalibrated = true;
+                lock (_clientSocketLock) {
+                    foreach (var socket in _clientSockets) {
+                        if (!socket.bCalibrated) {
                             allCalibrated = false;
                             break;
                         }
                     }
-                    
                 }
+
                 return allCalibrated;
             }
         }
 
-        public KinectServer(KinectSettings settings)
-        {
-            this.oSettings = settings;
+        public KinectServer(KinectSettings settings) {
+            _settings = settings;
         }
 
-        private void SocketListChanged()
-        {
-            if (eSocketListChanged != null)
-            {
-                eSocketListChanged(lClientSockets);
-            }
+        private void SocketListChanged() {
+            ESocketListChanged?.Invoke(_clientSockets);
         }
 
-        public void StartServer()
-        {
-            if (!bServerRunning)
-            {
-                oServerSocket = new Socket(SocketType.Stream, ProtocolType.Tcp);
-                oServerSocket.Blocking = false;
+        public void StartServer() {
+            if (_serverRunning) return;
+            
+            _serverSocket = new Socket(SocketType.Stream, ProtocolType.Tcp) {Blocking = false};
 
-                IPEndPoint endPoint = new IPEndPoint(IPAddress.Any, 48001);
-                oServerSocket.Bind(endPoint);
-                oServerSocket.Listen(10);
+            var endPoint = new IPEndPoint(IPAddress.Any, 48001);
+            _serverSocket.Bind(endPoint);
+            _serverSocket.Listen(10);
 
-                bServerRunning = true;
-                Thread listeningThread = new Thread(this.ListeningWorker);
-                listeningThread.Start();
-                Thread receivingThread = new Thread(this.ReceivingWorker);
-                receivingThread.Start();
-            }
+            _serverRunning = true;
+            var listeningThread = new Thread(ListeningWorker);
+            listeningThread.Start();
+            var receivingThread = new Thread(ReceivingWorker);
+            receivingThread.Start();
         }
 
-        public void StopServer()
-        {
-            if (bServerRunning)
-            {
-                bServerRunning = false;
+        public void StopServer() {
+            if (!_serverRunning) return;
+            _serverRunning = false;
 
-                oServerSocket.Close();
-                lock (oClientSocketLock)
-                    lClientSockets.Clear();
-            }
+            _serverSocket.Close();
+            lock (_clientSocketLock)
+                _clientSockets.Clear();
         }
 
-        public void CaptureSynchronizedFrame()
-        {
-            lock (oClientSocketLock)
-            {
-                for (int i = 0; i < lClientSockets.Count; i++)
-                    lClientSockets[i].CaptureFrame();
+        public void CaptureSynchronizedFrame() {
+            lock (_clientSocketLock) {
+                foreach (var socket in _clientSockets)
+                    socket.CaptureFrame();
             }
 
             //Wait till frames captured
-            bool allGathered = false;
-            while (!allGathered)
-            {
+            var allGathered = false;
+            while (!allGathered) {
                 allGathered = true;
 
-                lock (oClientSocketLock)
-                {
-                    for (int i = 0; i < lClientSockets.Count; i++)
-                    {
-                        if (!lClientSockets[i].bFrameCaptured)
-                        {
-                            allGathered = false;
-                            break;
-                        }
+                lock (_clientSocketLock) {
+                    if (_clientSockets.Any(t => !t.bFrameCaptured)) {
+                        allGathered = false;
                     }
                 }
             }
         }
 
-        public void Calibrate()
-        {
-            lock (oClientSocketLock)
-            {
-                for (int i = 0; i < lClientSockets.Count; i++)
-                {
-                    lClientSockets[i].Calibrate();
+        public void Calibrate() {
+            lock (_clientSocketLock) {
+                foreach (var socket in _clientSockets) {
+                    socket.Calibrate();
                 }
             }
         }
 
-        public void SendSettings()
-        {
-            lock (oClientSocketLock)
-            {
-                for (int i = 0; i < lClientSockets.Count; i++)
-                {
-                    lClientSockets[i].SendSettings(oSettings);
+        public void SendSettings() {
+            lock (_clientSocketLock) {
+                foreach (var socket in _clientSockets) {
+                    socket.SendSettings(_settings);
                 }
             }
         }
 
-        public void SendCalibrationData()
-        {
-            lock (oClientSocketLock)
-            {
-                for (int i = 0; i < lClientSockets.Count; i++)
-                {
-                    lClientSockets[i].SendCalibrationData();
+        public void SendCalibrationData() {
+            lock (_clientSocketLock) {
+                foreach (var socket in _clientSockets) {
+                    socket.SendCalibrationData();
                 }
             }
         }
 
-        public bool GetStoredFrame(List<List<byte>> lFramesRGB, List<List<Single>> lFramesVerts)
-        {
+        public bool GetStoredFrame(List<List<byte>> framesRgb, List<List<float>> framesVerts) {
             bool bNoMoreStoredFrames;
-            lFramesRGB.Clear();
-            lFramesVerts.Clear();
-            
-            lock (oFrameRequestLock)
-            {
+            framesRgb.Clear();
+            framesVerts.Clear();
+
+            lock (_frameRequestLock) {
                 //Request frames
-                lock (oClientSocketLock)
-                {
-                    for (int i = 0; i < lClientSockets.Count; i++)
-                        lClientSockets[i].RequestStoredFrame();
+                lock (_clientSocketLock) {
+                    foreach (var socket in _clientSockets)
+                        socket.RequestStoredFrame();
                 }
 
                 //Wait till frames received
-                bool allGathered = false;
+                var allGathered = false;
                 bNoMoreStoredFrames = false;
-                while (!allGathered)
-                {
-                    allGathered = true;                
-                    lock (oClientSocketLock)
-                    {
-                        for (int i = 0; i < lClientSockets.Count; i++)
-                        {
-                            if (!lClientSockets[i].bStoredFrameReceived)
-                            {
+                while (!allGathered) {
+                    allGathered = true;
+                    lock (_clientSocketLock) {
+                        foreach (var socket in _clientSockets) {
+                            if (!socket.bStoredFrameReceived) {
                                 allGathered = false;
                                 break;
                             }
 
-                            if (lClientSockets[i].bNoMoreStoredFrames)
+                            if (socket.bNoMoreStoredFrames)
                                 bNoMoreStoredFrames = true;
                         }
                     }
                 }
 
                 //Store received frames
-                lock (oClientSocketLock)
-                {
-                    for (int i = 0; i < lClientSockets.Count; i++)
-                    {
-                        lFramesRGB.Add(new List<byte>(lClientSockets[i].lFrameRGB));
-                        lFramesVerts.Add(new List<Single>(lClientSockets[i].lFrameVerts));
+                lock (_clientSocketLock) {
+                    foreach (var socket in _clientSockets) {
+                        framesRgb.Add(new List<byte>(socket.lFrameRGB));
+                        framesVerts.Add(new List<float>(socket.lFrameVerts));
                     }
                 }
             }
 
             if (bNoMoreStoredFrames)
                 return false;
-            else
-                return true;
+            
+            return true;
         }
 
-        public void GetLatestFrame(List<List<byte>> lFramesRGB, List<List<Single>> lFramesVerts, List<List<Body>> lFramesBody)
-        {
-            lFramesRGB.Clear();
-            lFramesVerts.Clear();
-            lFramesBody.Clear();
+        public void GetLatestFrame(List<List<byte>> framesRgb, List<List<float>> framesVerts,
+                                   List<List<Body>> framesBody) {
+            framesRgb.Clear();
+            framesVerts.Clear();
+            framesBody.Clear();
 
-            lock (oFrameRequestLock)
-            {
+            lock (_frameRequestLock) {
                 //Request frames
-                lock (oClientSocketLock)
-                {
-                    for (int i = 0; i < lClientSockets.Count; i++)
-                        lClientSockets[i].RequestLastFrame();
+                lock (_clientSocketLock) {
+                    foreach (var socket in _clientSockets)
+                        socket.RequestLastFrame();
                 }
 
                 //Wait till frames received
-                bool allGathered = false;
-                while (!allGathered)
-                {
+                var allGathered = false;
+                while (!allGathered) {
                     allGathered = true;
 
-                    lock (oClientSocketLock)
-                    {
-                        for (int i = 0; i < lClientSockets.Count; i++)
-                        {
-                            if (!lClientSockets[i].bLatestFrameReceived)
-                            {
-                                allGathered = false;
-                                break;
-                            }
+                    lock (_clientSocketLock) {
+                        if (_clientSockets.Any(t => !t.bLatestFrameReceived)) {
+                            allGathered = false;
                         }
                     }
                 }
 
                 //Store received frames
-                lock (oClientSocketLock)
-                {
-                    for (int i = 0; i < lClientSockets.Count; i++)
-                    {
-                        lFramesRGB.Add(new List<byte>(lClientSockets[i].lFrameRGB));
-                        lFramesVerts.Add(new List<Single>(lClientSockets[i].lFrameVerts));
-                        lFramesBody.Add(new List<Body>(lClientSockets[i].lBodies));
+                lock (_clientSocketLock) {
+                    foreach (var socket in _clientSockets) {
+                        framesRgb.Add(new List<byte>(socket.lFrameRGB));
+                        framesVerts.Add(new List<float>(socket.lFrameVerts));
+                        framesBody.Add(new List<Body>(socket.lBodies));
                     }
                 }
             }
         }
 
-        public void ClearStoredFrames()
-        {
-            lock (oClientSocketLock)
-            {
-                for (int i = 0; i < lClientSockets.Count; i++)
-                {
-                    lClientSockets[i].ClearStoredFrames();
+        public void ClearStoredFrames() {
+            lock (_clientSocketLock) {
+                foreach (var socket in _clientSockets) {
+                    socket.ClearStoredFrames();
                 }
             }
         }
 
-        private void ListeningWorker()
-        {
-            while (bServerRunning)
-            {
-                try
-                {
-                    Socket newClient = oServerSocket.Accept();
+        private void ListeningWorker() {
+            while (_serverRunning) {
+                try {
+                    var newClient = _serverSocket.Accept();
 
                     //we do not want to add new clients while a frame is being requested
-                    lock (oFrameRequestLock)
-                    {
-                        lock (oClientSocketLock)
-                        {
-                            lClientSockets.Add(new KinectSocket(newClient));
-                            lClientSockets[lClientSockets.Count - 1].SendSettings(oSettings);
-                            lClientSockets[lClientSockets.Count - 1].eChanged += new SocketChangedHandler(SocketListChanged);
-                            if (eSocketListChanged != null)
-                            {
-                                eSocketListChanged(lClientSockets);
-                            }
+                    lock (_frameRequestLock) {
+                        lock (_clientSocketLock) {
+                            _clientSockets.Add(new KinectSocket(newClient));
+                            _clientSockets[_clientSockets.Count - 1].SendSettings(_settings);
+                            _clientSockets[_clientSockets.Count - 1].eChanged += SocketListChanged;
+                            ESocketListChanged?.Invoke(_clientSockets);
                         }
                     }
-                }
-                catch (SocketException)
-                {
-                }
-                System.Threading.Thread.Sleep(100);
+                } catch (SocketException) { }
+
+                Thread.Sleep(100);
             }
 
-            if (eSocketListChanged != null)
-            {
-                eSocketListChanged(lClientSockets);
+            lock (_clientSocketLock) {
+                ESocketListChanged?.Invoke(_clientSockets);
             }
         }
 
-        private void ReceivingWorker()
-        {
-            System.Timers.Timer checkConnectionTimer = new System.Timers.Timer();
-            checkConnectionTimer.Interval = 1000;
+        private void ReceivingWorker() {
+            var checkConnectionTimer = new Timer {Interval = 1000};
 
-            checkConnectionTimer.Elapsed += delegate(object sender, System.Timers.ElapsedEventArgs e)
-            {
-                lock (oClientSocketLock)
-                {
-                    for (int i = 0; i < lClientSockets.Count; i++)
-                    {
-                        if (!lClientSockets[i].SocketConnected())
-                        {
-                            lClientSockets.RemoveAt(i);
-                            if (eSocketListChanged != null)
-                            {
-                                eSocketListChanged(lClientSockets);
-                            }
-                            continue;
-                        }
+            checkConnectionTimer.Elapsed += delegate {
+                lock (_clientSocketLock) {
+                    for (var i = 0; i < _clientSockets.Count; i++) {
+                        if (_clientSockets[i].SocketConnected()) continue;
+                        _clientSockets.RemoveAt(i);
+                        ESocketListChanged?.Invoke(_clientSockets);
                     }
                 }
             };
 
             checkConnectionTimer.Start();
 
-            while (bServerRunning)
-            {
-                lock (oClientSocketLock)
-                {
-                    for (int i = 0; i < lClientSockets.Count; i++)
-                    {
-                        byte[] buffer = lClientSockets[i].Receive(1);
+            while (_serverRunning) {
+                lock (_clientSocketLock) {
+                    foreach (var socket in _clientSockets) {
+                        var buffer = socket.Receive(1);
 
-                        while (buffer.Length != 0)
-                        {
-                            if (buffer[0] == 0)
-                            {
-                                lClientSockets[i].bFrameCaptured = true;
-                            }
-                            else if (buffer[0] == 1)
-                            {
-                                lClientSockets[i].ReceiveCalibrationData();
+                        while (buffer.Length != 0) {
+                            if (buffer[0] == 0) {
+                                socket.bFrameCaptured = true;
+                            } else if (buffer[0] == 1) {
+                                socket.ReceiveCalibrationData();
                             }
                             //stored frame
-                            else if (buffer[0] == 2)
-                            {
-                                lClientSockets[i].ReceiveFrame();
-                                lClientSockets[i].bStoredFrameReceived = true;
+                            else if (buffer[0] == 2) {
+                                socket.ReceiveFrame();
+                                socket.bStoredFrameReceived = true;
                             }
                             //last frame
-                            else if (buffer[0] == 3)
-                            {
-                                lClientSockets[i].ReceiveFrame();
-                                lClientSockets[i].bLatestFrameReceived = true;
+                            else if (buffer[0] == 3) {
+                                socket.ReceiveFrame();
+                                socket.bLatestFrameReceived = true;
                             }
 
-                            buffer = lClientSockets[i].Receive(1);
+                            buffer = socket.Receive(1);
                         }
                     }
                 }

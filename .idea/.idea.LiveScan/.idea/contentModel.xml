@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\Users\Anon\.Rider2017.3\system\resharper-host\local\Transient\ReSharperHost\v11\SolutionCaches\_LiveScan.-118688342.00" t="ExcludeRecursive" />
+    <e p="D:\Dominik\Unishit\Bachelorarbeit\Projekt\LiveScan3D" t="IncludeFlat">
+      <e p="bin" t="ExcludeRecursive" />
+      <e p="ICP" t="IncludeRecursive">
+        <e p="ICP.vcxproj" t="IncludeRecursive" />
+        <e p="x64\Debug" t="ExcludeRecursive" />
+      </e>
+      <e p="include" t="Include">
+        <e p="ICP" t="Include">
+          <e p="icp.h" t="Include" />
+        </e>
+        <e p="LiveScanClient" t="Include">
+          <e p="calibration.h" t="Include" />
+          <e p="filter.h" t="Include" />
+          <e p="frameFileWriterReader.h" t="Include" />
+          <e p="iCapture.h" t="Include" />
+          <e p="imageRenderer.h" t="Include" />
+          <e p="iMarker.h" t="Include" />
+          <e p="kinectCapture.h" t="Include" />
+          <e p="liveScanClient.h" t="Include" />
+          <e p="marker.h" t="Include" />
+          <e p="utils.h" t="Include" />
+        </e>
+        <e p="nanoflann.h" t="Include" />
+        <e p="socketCS.h" t="Include" />
+      </e>
+      <e p="LiveScan.sln" t="IncludeFlat" />
+      <e p="LiveScanClient" t="IncludeRecursive">
+        <e p="app.ico" t="Include" />
+        <e p="KinectClient.vcxproj" t="IncludeRecursive" />
+        <e p="LiveScanClient.rc" t="Include" />
+        <e p="resource.h" t="Include" />
+        <e p="stdafx.h" t="Include" />
+        <e p="x64\Debug" t="ExcludeRecursive" />
+      </e>
+      <e p="LiveScanPlayer" t="IncludeRecursive">
+        <e p="App.config" t="Include" />
+        <e p="FrameFileReaderBin.cs" t="Include" />
+        <e p="FrameFileReaderPly.cs" t="Include" />
+        <e p="IFrameFileReader.cs" t="Include" />
+        <e p="LiveScanPlayer.csproj" t="IncludeRecursive" />
+        <e p="obj" t="ExcludeRecursive" />
+        <e p="PlayerWindowForm.cs" t="Include" />
+        <e p="PlayerWindowForm.Designer.cs" t="Include" />
+        <e p="PlayerWindowForm.resx" t="Include" />
+        <e p="Program.cs" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="AssemblyInfo.cs" t="Include" />
+          <e p="Resources.Designer.cs" t="Include" />
+          <e p="Resources.resx" t="Include" />
+          <e p="Settings.Designer.cs" t="Include" />
+          <e p="Settings.settings" t="Include" />
+        </e>
+      </e>
+      <e p="LiveScanServer" t="IncludeRecursive">
+        <e p="App.config" t="Include" />
+        <e p="KinectServer.cs" t="Include" />
+        <e p="KinectSettings.cs" t="Include" />
+        <e p="KinectSocket.cs" t="Include" />
+        <e p="LiveScanServer.csproj" t="IncludeRecursive" />
+        <e p="MainWindowForm.cs" t="Include" />
+        <e p="MainWindowForm.Designer.cs" t="Include" />
+        <e p="MainWindowForm.resx" t="Include" />
+        <e p="obj" t="ExcludeRecursive" />
+        <e p="OpenGLWindow.cs" t="Include" />
+        <e p="Program.cs" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="AssemblyInfo.cs" t="Include" />
+          <e p="Resources.Designer.cs" t="Include" />
+          <e p="Resources.resx" t="Include" />
+          <e p="Settings.Designer.cs" t="Include" />
+          <e p="Settings.settings" t="Include" />
+        </e>
+        <e p="SettingsForm.cs" t="Include" />
+        <e p="SettingsForm.Designer.cs" t="Include" />
+        <e p="SettingsForm.resx" t="Include" />
+        <e p="TransferServer.cs" t="Include" />
+        <e p="TransferSocket.cs" t="Include" />
+        <e p="Utils.cs" t="Include" />
+        <e p="ZSTDDecompressor.cs" t="Include" />
+      </e>
+      <e p="packages" t="ExcludeRecursive" />
+      <e p="src" t="Include">
+        <e p="ICP" t="Include">
+          <e p="icp.cpp" t="Include" />
+          <e p="main.cpp" t="Include" />
+        </e>
+        <e p="LiveScanClient" t="Include">
+          <e p="calibration.cpp" t="Include" />
+          <e p="filter.cpp" t="Include" />
+          <e p="frameFileWriterReader.cpp" t="Include" />
+          <e p="iCapture.cpp" t="Include" />
+          <e p="imageRenderer.cpp" t="Include" />
+          <e p="iMarker.cpp" t="Include" />
+          <e p="kinectCapture.cpp" t="Include" />
+          <e p="liveScanClient.cpp" t="Include" />
+          <e p="marker.cpp" t="Include" />
+          <e p="utils.cpp" t="Include" />
+        </e>
+        <e p="socketCS.cpp" t="Include" />
+      </e>
+    </e>
+  </component>
+</project>

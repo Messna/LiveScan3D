@@ -1,237 +1,197 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Threading;
 using System.IO;
+using System.Threading;
+using System.Windows.Forms;
 using KinectServer;
 
-namespace LiveScanPlayer
-{
-    public partial class PlayerWindowForm : Form
-    {
-        BindingList<IFrameFileReader> lFrameFiles = new BindingList<IFrameFileReader>();
-        bool bPlayerRunning = false;
+namespace LiveScanPlayer {
+    public partial class PlayerWindowForm : Form {
+        private readonly BindingList<IFrameFileReader> _frameFiles = new BindingList<IFrameFileReader>();
+        private bool _playerRunning;
 
-        List<float> lAllVertices = new List<float>();
-        List<byte> lAllColors = new List<byte>();
+        private readonly List<float> _allVertices = new List<float>();
+        private readonly List<byte> _allColors = new List<byte>();
 
-        TransferServer oTransferServer = new TransferServer();
+        private readonly TransferServer _transferServer = new TransferServer();
 
-        AutoResetEvent eUpdateWorkerFinished = new AutoResetEvent(false);
+        private readonly AutoResetEvent _updateWorkerFinished = new AutoResetEvent(false);
 
-        public PlayerWindowForm()
-        {
+        public PlayerWindowForm() {
             InitializeComponent();
-           
-            oTransferServer.lVertices = lAllVertices;
-            oTransferServer.lColors = lAllColors;
+
+            _transferServer.Vertices = _allVertices;
+            _transferServer.Colors = _allColors;
 
             lFrameFilesListView.Columns.Add("Current frame", 75);
             lFrameFilesListView.Columns.Add("Filename", 300);
         }
 
-        private void PlayerWindowForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            bPlayerRunning = false;
-            oTransferServer.StopServer();
+        private void PlayerWindowForm_FormClosing(object sender, FormClosingEventArgs e) {
+            _playerRunning = false;
+            _transferServer.StopServer();
         }
 
-        private void btSelect_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog dialog = new OpenFileDialog();
-            dialog.Multiselect = true;
+        private void btSelect_Click(object sender, EventArgs e) {
+            var dialog = new OpenFileDialog {Multiselect = true};
             dialog.ShowDialog();
 
-            lock (lFrameFiles)
-            {
-                for (int i = 0; i < dialog.FileNames.Length; i++)
-                {                
-                    lFrameFiles.Add(new FrameFileReaderBin(dialog.FileNames[i]));
+            lock (_frameFiles) {
+                foreach (var fileName in dialog.FileNames) {
+                    _frameFiles.Add(new FrameFileReaderBin(fileName));
 
-                    var item = new ListViewItem(new [] { "0", dialog.FileNames[i]});
+                    var item = new ListViewItem(new[] {"0", fileName});
                     lFrameFilesListView.Items.Add(item);
                 }
             }
         }
 
-        private void btnSelectPly_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog dialog = new OpenFileDialog();
-            dialog.Multiselect = true;
+        private void btnSelectPly_Click(object sender, EventArgs e) {
+            var dialog = new OpenFileDialog {Multiselect = true};
             dialog.ShowDialog();
 
             if (dialog.FileNames.Length == 0)
                 return;
 
-            lock (lFrameFiles)
-            {
-                    lFrameFiles.Add(new FrameFileReaderPly(dialog.FileNames));
-                    
-                    
-                    var item = new ListViewItem(new[] { "0", Path.GetDirectoryName(dialog.FileNames[0]) });
-                    lFrameFilesListView.Items.Add(item);              
+            lock (_frameFiles) {
+                _frameFiles.Add(new FrameFileReaderPly(dialog.FileNames));
+
+
+                var item = new ListViewItem(new[] {"0", Path.GetDirectoryName(dialog.FileNames[0])});
+                lFrameFilesListView.Items.Add(item);
             }
         }
 
-        private void btStart_Click(object sender, EventArgs e)
-        {
-            bPlayerRunning = !bPlayerRunning;
+        private void btStart_Click(object sender, EventArgs e) {
+            _playerRunning = !_playerRunning;
 
-            if (bPlayerRunning)
-            {            
-                oTransferServer.StartServer();
+            if (_playerRunning) {
+                _transferServer.StartServer();
                 updateWorker.RunWorkerAsync();
                 btStart.Text = "Stop player";
-            }
-            else
-            {
-                oTransferServer.StopServer();
+            } else {
+                _transferServer.StopServer();
                 btStart.Text = "Start player";
-                eUpdateWorkerFinished.WaitOne();
+                _updateWorkerFinished.WaitOne();
             }
         }
 
-        private void btRemove_Click(object sender, EventArgs e)
-        {
+        private void btRemove_Click(object sender, EventArgs e) {
             if (lFrameFilesListView.SelectedIndices.Count == 0)
                 return;
 
-            lock (lFrameFiles)
-            {
-                int idx = lFrameFilesListView.SelectedIndices[0];
+            lock (_frameFiles) {
+                var idx = lFrameFilesListView.SelectedIndices[0];
                 lFrameFilesListView.Items.RemoveAt(idx);
-                lFrameFiles.RemoveAt(idx);
+                _frameFiles.RemoveAt(idx);
             }
         }
 
-        private void btRewind_Click(object sender, EventArgs e)
-        {
-            lock (lFrameFiles)
-            {
-                for (int i = 0; i < lFrameFiles.Count; i++)
-                {                    
-                    lFrameFiles[i].Rewind();
+        private void btRewind_Click(object sender, EventArgs e) {
+            lock (_frameFiles) {
+                for (var i = 0; i < _frameFiles.Count; i++) {
+                    _frameFiles[i].Rewind();
                     lFrameFilesListView.Items[i].Text = "0";
                 }
             }
         }
 
-        private void btShow_Click(object sender, EventArgs e)
-        {
+        private void btShow_Click(object sender, EventArgs e) {
             if (!OpenGLWorker.IsBusy)
                 OpenGLWorker.RunWorkerAsync();
         }
 
-        private void updateWorker_DoWork(object sender, DoWorkEventArgs e)
-        {
-            int curFrameIdx = 0;
-            string outDir = "outPlayer\\";
-            DirectoryInfo di = Directory.CreateDirectory(outDir);
+        private void updateWorker_DoWork(object sender, DoWorkEventArgs e) {
+            var curFrameIdx = 0;
+            const string outDir = "outPlayer\\";
+            Directory.CreateDirectory(outDir);
 
-            while (bPlayerRunning)
-            {
+            while (_playerRunning) {
                 Thread.Sleep(50);
 
-                List<float> tempAllVertices = new List<float>();
-                List<byte> tempAllColors = new List<byte>();
+                var tempAllVertices = new List<float>();
+                var tempAllColors = new List<byte>();
 
-                lock (lFrameFiles)
-                {
-                    for (int i = 0; i < lFrameFiles.Count; i++)
-                    {
-                        List<float> vertices = new List<float>();
-                        List<byte> colors = new List<byte>();
-                        lFrameFiles[i].ReadFrame(vertices, colors);
+                lock (_frameFiles) {
+                    foreach (var file in _frameFiles) {
+                        var vertices = new List<float>();
+                        var colors = new List<byte>();
+                        file.ReadFrame(vertices, colors);
 
-                        tempAllVertices.AddRange(vertices);                        
+                        tempAllVertices.AddRange(vertices);
                         tempAllColors.AddRange(colors);
                     }
                 }
 
-                Thread frameIdxUpdate = new Thread(() => this.Invoke((MethodInvoker)delegate { this.UpdateDisplayedFrameIndices(); }));
+                var frameIdxUpdate = new Thread(() => Invoke((MethodInvoker) UpdateDisplayedFrameIndices));
                 frameIdxUpdate.Start();
 
-                lock (lAllVertices)
-                {
-                    lAllVertices.Clear();
-                    lAllColors.Clear();
-                    lAllVertices.AddRange(tempAllVertices);
-                    lAllColors.AddRange(tempAllColors);
+                lock (_allVertices) {
+                    _allVertices.Clear();
+                    _allColors.Clear();
+                    _allVertices.AddRange(tempAllVertices);
+                    _allColors.AddRange(tempAllColors);
                 }
 
                 if (chSaveFrames.Checked)
                     SaveCurrentFrameToFile(outDir, curFrameIdx);
-                
+
 
                 curFrameIdx++;
             }
 
-            eUpdateWorkerFinished.Set();
+            _updateWorkerFinished.Set();
         }
 
-        private void OpenGLWorker_DoWork(object sender, DoWorkEventArgs e)
-        {
-            OpenGLWindow openGLWindow = new OpenGLWindow();
+        private void OpenGLWorker_DoWork(object sender, DoWorkEventArgs e) {
+            var openGlWindow = new OpenGlWindow {
+                vertices = _allVertices,
+                colors = _allColors
+            };
 
-            openGLWindow.vertices = lAllVertices;
-            openGLWindow.colors = lAllColors;
 
-            openGLWindow.Run();
+            openGlWindow.Run();
         }
 
-        private void lFrameFilesListView_DoubleClick(object sender, EventArgs e)
-        {
+        private void lFrameFilesListView_DoubleClick(object sender, EventArgs e) {
             lFrameFilesListView.SelectedItems[0].BeginEdit();
         }
 
-        private void lFrameFilesListView_AfterLabelEdit(object sender, LabelEditEventArgs e)
-        {
-            int fileIdx = lFrameFilesListView.SelectedIndices[0];
+        private void lFrameFilesListView_AfterLabelEdit(object sender, LabelEditEventArgs e) {
+            var fileIdx = lFrameFilesListView.SelectedIndices[0];
             int frameIdx;
-            bool res = Int32.TryParse(e.Label, out frameIdx);
+            var res = int.TryParse(e.Label, out frameIdx);
 
-            if (!res)
-            {
+            if (!res) {
                 e.CancelEdit = true;
                 return;
             }
 
-            lock (lFrameFiles)
-            {
-                lFrameFiles[fileIdx].JumpToFrame(frameIdx);
+            lock (_frameFiles) {
+                _frameFiles[fileIdx].JumpToFrame(frameIdx);
             }
-
         }
 
-        private void UpdateDisplayedFrameIndices()
-        {
-            lock (lFrameFiles)
-            {
-                for (int i = 0; i < lFrameFiles.Count; i++)
-                {
-                    lFrameFilesListView.Items[i].SubItems[0].Text = lFrameFiles[i].frameIdx.ToString();
+        private void UpdateDisplayedFrameIndices() {
+            lock (_frameFiles) {
+                for (var i = 0; i < _frameFiles.Count; i++) {
+                    lFrameFilesListView.Items[i].SubItems[0].Text = _frameFiles[i].FrameIdx.ToString();
                 }
             }
         }
 
-        private void SaveCurrentFrameToFile(string outDir, int frameIdx)
-        {
-            List<float> lVertices = new List<float>();
-            List<byte> lColors = new List<byte>();
+        private void SaveCurrentFrameToFile(string outDir, int frameIdx) {
+            var lVertices = new List<float>();
+            var lColors = new List<byte>();
 
-            lock (lAllVertices)
-            {
-                lVertices.AddRange(lAllVertices);
-                lColors.AddRange(lAllColors);
+            lock (_allVertices) {
+                lVertices.AddRange(_allVertices);
+                lColors.AddRange(_allColors);
             }
-            string outputFilename = outDir + frameIdx.ToString().PadLeft(5, '0') + ".ply";
-            Utils.saveToPly(outputFilename, lVertices, lColors, true);
+
+            var outputFilename = outDir + frameIdx.ToString().PadLeft(5, '0') + ".ply";
+            Utils.SaveToPly(outputFilename, lVertices, lColors, true);
         }
     }
 }
